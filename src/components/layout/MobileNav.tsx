@@ -54,7 +54,7 @@ export function MobileNav({ items }: { items: readonly NavItem[] }) {
   }, [open]);
 
   return (
-    <div className="md:hidden">
+    <div className="lg:hidden">
       <button
         ref={buttonRef}
         type="button"
@@ -64,7 +64,7 @@ export function MobileNav({ items }: { items: readonly NavItem[] }) {
         className="grid size-11 place-items-center rounded-full border border-rule bg-white text-ink"
       >
         <Menu className="size-5" aria-hidden />
-        <span className="sr-only">Open menu</span>
+        <span className="sr-only">மெனுவைத் திற</span>
       </button>
 
       {open && (
@@ -73,7 +73,7 @@ export function MobileNav({ items }: { items: readonly NavItem[] }) {
           id="mobile-nav"
           role="dialog"
           aria-modal="true"
-          aria-label="Menu"
+          aria-label="மெனு"
           className="fixed inset-0 z-40 overflow-y-auto bg-paper"
         >
           <div className="container-page flex justify-end pt-5">
@@ -86,10 +86,10 @@ export function MobileNav({ items }: { items: readonly NavItem[] }) {
               className="grid size-11 place-items-center rounded-full border border-rule bg-white text-ink"
             >
               <X className="size-5" aria-hidden />
-              <span className="sr-only">Close menu</span>
+              <span className="sr-only">மெனுவை மூடு</span>
             </button>
           </div>
-          <nav aria-label="Mobile" className="container-page py-5">
+          <nav aria-label="மொபைல் வழிசெலுத்தல்" className="container-page py-5">
             <HeaderSearch id="mobile-search" />
             <ul className="mt-5 divide-y divide-rule border-y border-rule">
               {items.map((item) => (
@@ -105,8 +105,8 @@ export function MobileNav({ items }: { items: readonly NavItem[] }) {
               ))}
             </ul>
             <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm text-ink-soft">
-              <li><Link href="/about" className="link-quiet">About</Link></li>
-              <li><Link href="/contact" className="link-quiet">Contact</Link></li>
+              <li><Link href="/about" className="link-quiet">எங்களைப் பற்றி</Link></li>
+              <li><Link href="/contact" className="link-quiet">தொடர்புக்கு</Link></li>
             </ul>
           </nav>
         </div>

@@ -1,27 +1,25 @@
 import Link from "next/link";
 import { HeaderSearch } from "@/components/layout/HeaderSearch";
 
-export const metadata = { title: "Page not found" };
+export const metadata = { title: "பக்கம் கிடைக்கவில்லை" };
 
 export default function NotFound() {
   return (
     <div className="container-page py-20 md:py-28">
-      <p lang="ta" className="font-tamil text-2xl font-bold text-tea">
-        இந்த பக்கம் இல்லை
-      </p>
-      <h1 className="headline mt-2 text-[2.8rem] md:text-[4rem]">This page isn’t here</h1>
+      <p className="text-lg font-bold text-tea">404</p>
+      <h1 className="headline mt-2 text-[2.3rem] md:text-[3.2rem]">இந்தப் பக்கம் இங்கே இல்லை</h1>
       <p className="mt-3 max-w-xl text-lg text-ink-soft">
-        The link may be old, or the article may have moved. Search for it, or start from the latest stories.
+        இணைப்பு பழையதாக இருக்கலாம், அல்லது கட்டுரை வேறு இடத்துக்கு மாறியிருக்கலாம். தேடிப் பாருங்கள், அல்லது சமீபத்திய செய்திகளிலிருந்து தொடங்குங்கள்.
       </p>
       <div className="mt-8 max-w-sm">
         <HeaderSearch id="notfound-search" />
       </div>
       <div className="mt-8 flex flex-wrap gap-3">
         <Link href="/" className="rounded-full bg-ink px-5 py-2.5 font-semibold text-paper hover:bg-ink/85">
-          Go to the homepage
+          முகப்புப் பக்கம்
         </Link>
         <Link href="/articles" className="rounded-full border-2 border-ink px-5 py-2 font-semibold hover:bg-ink hover:text-paper">
-          Browse all articles
+          எல்லாக் கட்டுரைகளும்
         </Link>
       </div>
     </div>

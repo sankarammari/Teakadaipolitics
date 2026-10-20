@@ -32,8 +32,8 @@ export function YouTubePlayer({ videoId, title, thumbnail }: YouTubePlayerProps)
         <div className="absolute inset-0 grid place-items-center p-6 text-center text-paper">
           <div>
             <VideoOff className="mx-auto size-8" aria-hidden />
-            <p className="headline mt-2 text-2xl">This video isn’t linked yet</p>
-            <p className="mt-1 text-sm text-paper/80">Add its YouTube id in the video data to enable playback.</p>
+            <p className="headline mt-2 text-2xl">இந்த வீடியோ இன்னும் இணைக்கப்படவில்லை</p>
+            <p className="mt-1 text-sm text-paper/80">இயக்க, வீடியோ தரவில் அதன் யூடியூப் இணைப்பைச் சேர்க்கவும்.</p>
           </div>
         </div>
       </div>
@@ -62,11 +62,11 @@ export function YouTubePlayer({ videoId, title, thumbnail }: YouTubePlayerProps)
             <span className="grid size-20 place-items-center rounded-full bg-paper text-ink shadow-lg group-hover:scale-105 group-focus-visible:scale-105 motion-safe:transition-transform">
               <Play className="size-8 translate-x-0.5" fill="currentColor" aria-hidden />
             </span>
-            <span className="sr-only">Play video: {title}</span>
+            <span className="sr-only">வீடியோவை இயக்கு: {title}</span>
           </button>
           {watchUrl && (
             <noscript>
-              <a href={watchUrl}>Watch on YouTube</a>
+              <a href={watchUrl}>யூடியூபில் பாருங்கள்</a>
             </noscript>
           )}
         </>

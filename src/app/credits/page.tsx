@@ -5,8 +5,8 @@ import { repository } from "@/lib/content";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Photo credits",
-  description: "Credits and licences for photos used on Teakadai Politics.",
+  title: "படங்களுக்கான நன்றி",
+  description: "டீக்கடை அரசியல் தளத்தில் பயன்படுத்தப்பட்ட படங்களின் உரிமையாளர்களும் உரிமங்களும்.",
   path: "/credits",
 });
 
@@ -20,8 +20,8 @@ export default async function CreditsPage() {
   return (
     <>
       <PageIntro
-        title="Photo credits"
-        description="Photos on this site illustrate the topic of each story. They are used under the licences listed and do not show the specific events described."
+        title="படங்களுக்கான நன்றி"
+        description="இந்தத் தளத்தில் உள்ள படங்கள் ஒவ்வொரு கட்டுரையின் பொருளை விளக்குவதற்கு மட்டுமே. கீழே குறிப்பிட்ட உரிமங்களின்கீழ் பயன்படுத்தப்படுகின்றன; கட்டுரையில் விவரிக்கப்படும் குறிப்பிட்ட நிகழ்வுகளைக் காட்டுபவை அல்ல."
       />
       <div className="container-page">
         <ul className="max-w-3xl divide-y divide-rule border-y border-rule">

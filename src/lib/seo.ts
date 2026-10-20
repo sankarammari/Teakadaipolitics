@@ -71,7 +71,7 @@ export function articleJsonLd(article: Article) {
     image: [absoluteUrl(article.coverImage)],
     datePublished: article.publishedAt,
     dateModified: article.updatedAt ?? article.publishedAt,
-    author: [{ "@type": "Person", name: article.author.name }],
+    author: [{ "@type": "Organization", name: siteConfig.name, url: siteConfig.url }],
     publisher: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
     mainEntityOfPage: absoluteUrl(`/articles/${article.slug}`),
     keywords: article.tags.join(", "),

@@ -1,7 +1,12 @@
-# Teakadai Politics (Phase 1 frontend)
+# Teakadai Politics / டீக்கடை அரசியல் (Phase 1 frontend)
 
-Public website for `teakadaipolitics.com`: political news, analysis, opinion and YouTube video commentary.
+Public website for `teakadaipolitics.com`: Tamil Nadu political news, analysis, opinion and YouTube video commentary.
+The site is **Tamil only** (`<html lang="ta">`, Tamil UI, Tamil content, `ta-IN` dates); URL slugs stay ASCII.
 Phase 1 is frontend only. All content comes from local TypeScript mock data; there is no backend or database.
+
+Fonts: Anek Tamil (headlines and UI) and Noto Serif Tamil (article body). The social share image
+(`src/app/opengraph-image.png`, `twitter-image.png`) is a static PNG because Next.js's generated OG images
+cannot shape Tamil text; re-render it in a browser if the name or tagline changes.
 
 Built with Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS 4 and Lucide icons.
 
@@ -36,6 +41,16 @@ Branding, navigation and links live in `src/config/site.ts`. Environment variabl
 | `NEXT_PUBLIC_API_BASE_URL` | Reserved for the Phase 2 backend. Unused now. |
 
 Brand colours and fonts are tokens at the top of `src/app/globals.css` and in `src/app/layout.tsx`.
+
+## Motion
+
+Entrance and scroll effects use the same model as the DoctorProject site: elements carry
+`data-anim="fade|fadeUp|foldLeft|drop|wipe|line"` (use the `anim(kind, delay)` helper in `src/lib/anim.ts`),
+and an inline script (`src/lib/scroll-animations.ts`, added at the end of `<body>`) reveals them with an
+IntersectionObserver. The same script drives the sticky header state, reading progress bar and scroll
+scaling (`data-motion-scale`). Content is never hidden unless the script runs,
+new nodes are picked up automatically, and `prefers-reduced-motion` turns everything off. Keyframes and rules
+are under "Motion system" in `globals.css`.
 
 ## Project structure
 

@@ -4,8 +4,8 @@ import { repository } from "@/lib/content";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "All articles",
-  description: "News, analysis and opinion from Teakadai Politics. Filter by category or type, or search by topic.",
+  title: "எல்லாக் கட்டுரைகளும்",
+  description: "டீக்கடை அரசியலின் தமிழ்நாட்டுச் செய்திகள், பகுப்பாய்வுகள், கருத்துக் கட்டுரைகள். பிரிவு அல்லது வகைப்படி வடிகட்டலாம், பொருள்வாரியாகத் தேடலாம்.",
   path: "/articles",
 });
 
@@ -14,8 +14,8 @@ export default async function ArticlesPage() {
   return (
     <>
       <PageIntro
-        title="All articles"
-        description="Every news report, analysis and opinion piece, newest first. Narrow it down by category, type or a search term."
+        title="எல்லாக் கட்டுரைகளும்"
+        description="அனைத்துச் செய்திகளும், பகுப்பாய்வுகளும், கருத்துக் கட்டுரைகளும், புதியவை முதலில். பிரிவு, வகை அல்லது தேடல் சொல்லால் சுருக்கலாம்."
       />
       <div className="container-page">
         <ArticleBrowser articles={articles} categories={categories} />

@@ -1,28 +1,23 @@
 import type { Metadata, Viewport } from "next";
-import { Anek_Latin, Anek_Tamil, Source_Serif_4 } from "next/font/google";
+import { Anek_Tamil, Noto_Serif_Tamil } from "next/font/google";
+import { ArrowUp } from "lucide-react";
+import { ScrollAnimations } from "@/components/common/ScrollAnimations";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { siteConfig } from "@/config/site";
+import { SCROLL_ANIMATION_SCRIPT } from "@/lib/scroll-animations";
 import "./globals.css";
 
-const anek = Anek_Latin({
-  subsets: ["latin"],
-  axes: ["wdth"],
-  variable: "--font-anek",
-  display: "swap",
-});
-
 const anekTamil = Anek_Tamil({
-  subsets: ["tamil"],
-  weight: ["600", "700"],
+  subsets: ["tamil", "latin"],
+  axes: ["wdth"],
   variable: "--font-anek-tamil",
   display: "swap",
 });
 
-const sourceSerif = Source_Serif_4({
-  subsets: ["latin"],
-  style: ["normal", "italic"],
-  variable: "--font-source-serif",
+const notoSerifTamil = Noto_Serif_Tamil({
+  subsets: ["tamil", "latin"],
+  variable: "--font-serif-tamil",
   display: "swap",
 });
 
@@ -50,19 +45,28 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en-IN" className={`${anek.variable} ${anekTamil.variable} ${sourceSerif.variable}`}>
-      <body className="flex min-h-dvh flex-col antialiased">
+    <html lang="ta" className={`${anekTamil.variable} ${notoSerifTamil.variable}`} suppressHydrationWarning>
+      <body id="top" className="flex min-h-dvh flex-col antialiased">
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
         >
-          Skip to content
+          உள்ளடக்கத்துக்குச் செல்ல
         </a>
         <Header />
         <main id="main" className="flex-1">
           {children}
         </main>
         <Footer />
+        <a
+          href="#top"
+          className="to-top fixed bottom-5 right-5 z-30 grid size-12 place-items-center rounded-full bg-ink text-paper shadow-lg hover:bg-tea"
+        >
+          <ArrowUp className="size-5" aria-hidden />
+          <span className="sr-only">மேலே செல்ல</span>
+        </a>
+        <ScrollAnimations />
+        <script dangerouslySetInnerHTML={{ __html: SCROLL_ANIMATION_SCRIPT }} />
       </body>
     </html>
   );

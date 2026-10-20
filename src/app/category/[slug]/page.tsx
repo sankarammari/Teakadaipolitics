@@ -29,9 +29,9 @@ export default async function CategoryPage({ params }: Props) {
   return (
     <>
       <div className="container-page pb-8 pt-10 md:pt-14">
-        <h1 className="headline text-[2.6rem] md:text-[3.6rem]">{category.name}</h1>
+        <h1 className="headline text-[2.1rem] md:text-[2.9rem]">{category.name}</h1>
         <p className="mt-3 max-w-2xl text-lg text-ink-soft">{category.description}</p>
-        <nav aria-label="Other categories" className="mt-6">
+        <nav aria-label="பிற பிரிவுகள்" className="mt-6">
           <ul className="flex flex-wrap gap-2">
             {categories.map((c) => (
               <li key={c.id}>
@@ -52,9 +52,9 @@ export default async function CategoryPage({ params }: Props) {
           <ArticleBrowser articles={articles} categories={categories} />
         ) : (
           <EmptyState
-            title={`No ${category.name.toLowerCase()} articles yet`}
-            message="This section is ready, and new articles will appear here once published."
-            action={{ label: "Browse all articles", href: "/articles" }}
+            title={`${category.name}: இன்னும் கட்டுரைகள் இல்லை`}
+            message="இந்தப் பிரிவு தயார்; புதிய கட்டுரைகள் வெளியானதும் இங்கே தோன்றும்."
+            action={{ label: "எல்லாக் கட்டுரைகளும்", href: "/articles" }}
           />
         )}
       </div>

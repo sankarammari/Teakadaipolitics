@@ -11,6 +11,10 @@ interface CoverImageProps {
   sizes?: string;
   priority?: boolean;
   className?: string;
+  /** Ease the photo in slightly when the surrounding `.group` card is hovered. */
+  hoverZoom?: boolean;
+  /** Extra props for the frame, e.g. anim("wipe") */
+  frameProps?: Record<string, unknown>;
 }
 
 const FALLBACK = "/images/fallback.svg";
@@ -23,22 +27,31 @@ export function CoverImage({
   sizes = "(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw",
   priority = false,
   className = "",
+  hoverZoom = true,
+  frameProps,
 }: CoverImageProps) {
   const [current, setCurrent] = useState(src || FALLBACK);
 
   return (
-    <div className={`relative overflow-hidden rounded-md bg-paper-deep ${aspect} ${className}`}>
-      <Image
-        src={current}
-        alt={alt}
-        fill
-        sizes={sizes}
-        priority={priority}
-        // Local SVG placeholders don't need the optimiser; real photos will use it.
-        unoptimized={current.endsWith(".svg")}
-        className="object-cover"
-        onError={() => current !== FALLBACK && setCurrent(FALLBACK)}
-      />
+    <div {...frameProps} className={`relative overflow-hidden rounded-md bg-paper-deep ${aspect} ${className}`}>
+      {/* Inner layer: a wipe animates this layer while the photo itself settles from its zoom */}
+      <div className="absolute inset-0">
+        <Image
+          src={current}
+          alt={alt}
+          fill
+          sizes={sizes}
+          priority={priority}
+          quality={85}
+          // Local SVG placeholders don't need the optimiser; real photos will use it.
+          unoptimized={current.endsWith(".svg")}
+          // Bias the crop upwards so towers and rooflines aren't cut off
+          className={`object-cover object-[50%_30%] ${
+            hoverZoom ? "transition-transform duration-700 ease-out group-hover:scale-[1.04]" : ""
+          }`}
+          onError={() => current !== FALLBACK && setCurrent(FALLBACK)}
+        />
+      </div>
     </div>
   );
 }

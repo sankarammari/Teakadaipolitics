@@ -13,10 +13,10 @@
   --color-analysis: #1c6247;
   --color-opinion: #8a2236;
 
-  --font-display: var(--font-anek), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-anek), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-source-serif), Georgia, serif;
-  --font-tamil: var(--font-anek-tamil), var(--font-anek), sans-serif;
+  --font-display: var(--font-anek-tamil), "Nirmala UI", "Latha", sans-serif;
+  --font-sans: var(--font-anek-tamil), "Nirmala UI", "Latha", sans-serif;
+  --font-serif: var(--font-serif-tamil), "Nirmala UI", "Latha", serif;
+  --font-tamil: var(--font-anek-tamil), "Nirmala UI", sans-serif;
 }
 
 @layer base {
@@ -30,7 +30,8 @@
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-size: 1.0625rem;
-    line-height: 1.55;
+    /* Tamil vowel signs sit above and below the line; give them room */
+    line-height: 1.7;
     overflow-x: hidden;
   }
 
@@ -46,13 +47,12 @@
 }
 
 @layer components {
-  /* Condensed headline voice, using Anek's width axis */
+  /* Slightly condensed headline voice, using Anek Tamil's width axis */
   .headline {
     font-family: var(--font-display);
-    font-stretch: 78%;
+    font-stretch: 87.5%;
     font-weight: 700;
-    line-height: 1.04;
-    letter-spacing: -0.01em;
+    line-height: 1.28;
     text-wrap: balance;
   }
 
@@ -82,9 +82,178 @@
   /* Article reading column */
   .prose-body {
     font-family: var(--font-serif);
-    font-size: 1.15rem;
-    line-height: 1.72;
-    max-width: 40rem;
+    font-size: 1.1rem;
+    line-height: 1.9;
+    max-width: 42rem;
+  }
+}
+
+/* ============================================================
+   Motion system (same model as DoctorProject's entrance animations).
+   Elements tagged data-anim="fade" | "fadeUp" | "foldLeft" | "drop" |
+   "wipe" | "line" (+ --anim-delay / --anim-duration) stay hidden from
+   the first paint. The inline script from lib/scroll-animations.ts sets
+   data-anim-state="wait" -> "in" when one scrolls into view, and "done"
+   once its animation ends. Nothing is hidden until that script has set
+   html[data-anim-on], so content stays visible if it never runs.
+   ============================================================ */
+@keyframes tp-fade { to { opacity: 1; } }
+@keyframes tp-fade-up {
+  from { opacity: 0; transform: translateY(var(--anim-distance, 28px)); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes tp-fold-left { to { opacity: 1; transform: none; } }
+@keyframes tp-drop {
+  0% { opacity: 0; transform: translateY(-70%) scale(0.6); }
+  60% { opacity: 1; transform: translateY(6%) scale(1.06); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes tp-wipe {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes tp-kenburns {
+  from { transform: scale(1.14); }
+  to { transform: scale(1); }
+}
+@keyframes tp-line {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes tp-marquee { to { transform: translateX(-50%); } }
+@keyframes tp-pulse {
+  0% { box-shadow: 0 0 0 0 rgb(255 255 255 / 0.75); }
+  100% { box-shadow: 0 0 0 9px rgb(255 255 255 / 0); }
+}
+@keyframes tp-ring {
+  from { transform: scale(1); opacity: 0.55; }
+  to { transform: scale(1.9); opacity: 0; }
+}
+
+[data-anim="fade"] { --anim-name: tp-fade; }
+[data-anim="fadeUp"] { --anim-name: tp-fade-up; }
+[data-anim="foldLeft"] { --anim-name: tp-fold-left; }
+[data-anim="drop"] { --anim-name: tp-drop; }
+/* The wipe runs on the frame's children: Chrome's IntersectionObserver
+   counts the target's own clip-path, so a clipped frame would never start */
+[data-anim="wipe"] { --anim-name: none; }
+[data-anim="line"] { --anim-name: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  html[data-anim-on] [data-anim]:not([data-anim-state="done"]) { opacity: 0; }
+  html[data-anim-on] [data-anim="foldLeft"]:not([data-anim-state="done"]) {
+    transform-origin: left;
+    transform: perspective(2000px) rotateY(35deg);
+  }
+  html[data-anim-on] [data-anim="wipe"]:not([data-anim-state="done"]) { opacity: 1; }
+  html[data-anim-on] [data-anim="wipe"]:not([data-anim-state="done"]) > * { clip-path: inset(0 100% 0 0); }
+  html[data-anim-on] [data-anim="line"]:not([data-anim-state="done"]) { opacity: 1; }
+  html[data-anim-on] [data-anim="line"]:not([data-anim-state="done"])::after { transform: scaleX(0); }
+
+  [data-anim][data-anim-state="in"] {
+    animation: var(--anim-name) var(--anim-duration, 900ms) var(--anim-ease, cubic-bezier(0.22, 0.61, 0.36, 1))
+      var(--anim-delay, 0ms) both;
+  }
+  [data-anim="wipe"][data-anim-state="in"] > * {
+    animation: tp-wipe var(--anim-duration, 1100ms) cubic-bezier(0.77, 0, 0.175, 1) var(--anim-delay, 0ms) both;
+  }
+  /* The photo inside a wipe settles from a slow zoom (Ken Burns) */
+  [data-anim="wipe"]:is([data-anim-state="in"], [data-anim-state="done"]) img {
+    animation: tp-kenburns 1.8s cubic-bezier(0.22, 0.61, 0.36, 1) var(--anim-delay, 0ms) backwards;
+  }
+  [data-anim="line"][data-anim-state="in"]::after {
+    animation: tp-line 900ms cubic-bezier(0.77, 0, 0.175, 1) var(--anim-delay, 0ms) both;
+  }
+}
+
+/* Section rule that draws itself in from the left */
+.draw-rule {
+  position: relative;
+}
+.draw-rule::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--color-ink);
+  transform-origin: left;
+}
+
+/* Header: compact wordmark and shadow once the page scrolls */
+.site-nav {
+  transition: box-shadow 250ms ease, background-color 250ms ease;
+}
+html[data-scrolled] .site-nav {
+  box-shadow: 0 6px 18px -12px rgb(23 32 46 / 0.45);
+  background-color: rgb(245 246 242 / 0.97);
+  backdrop-filter: blur(10px);
+}
+.nav-mark {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: max-width 400ms cubic-bezier(0.22, 0.61, 0.36, 1), opacity 300ms ease, margin 400ms ease;
+}
+html[data-scrolled] .nav-mark {
+  max-width: 14rem;
+  opacity: 1;
+  margin-inline-end: 1.5rem;
+}
+
+/* Make room for the compact wordmark on narrower desktops */
+@media (max-width: 1279px) {
+  html[data-scrolled] .nav-search {
+    display: none;
+  }
+}
+
+/* Latest-headlines ticker */
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: tp-marquee var(--ticker-duration, 45s) linear infinite;
+}
+.ticker:hover .ticker-track,
+.ticker:focus-within .ticker-track {
+  animation-play-state: paused;
+}
+.live-dot {
+  animation: tp-pulse 1.6s ease-out infinite;
+}
+
+/* Video play button ring on hover */
+.play-ring {
+  opacity: 0;
+}
+.group:hover .play-ring,
+.group:focus-within .play-ring {
+  animation: tp-ring 1.4s ease-out infinite;
+}
+
+/* Reading progress bar (article pages) */
+.reading-progress {
+  transform: scaleX(var(--read, 0));
+  transform-origin: left;
+}
+
+/* Back-to-top button */
+.to-top {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity 250ms ease, transform 250ms ease;
+}
+html[data-scrolled-far] .to-top {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:focus-within {
+    scroll-behavior: smooth;
   }
 }
 
@@ -96,5 +265,9 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  .ticker-track,
+  .live-dot {
+    animation: none;
   }
 }

@@ -2,9 +2,9 @@ import { siteConfig, type SocialPlatform } from "@/config/site";
 import { SocialIcon } from "./SocialIcon";
 
 const platforms: { key: SocialPlatform; name: string; action: string }[] = [
-  { key: "youtube", name: "YouTube", action: "Watch on YouTube" },
-  { key: "instagram", name: "Instagram", action: "Follow on Instagram" },
-  { key: "x", name: "X (Twitter)", action: "Follow on X" },
+  { key: "youtube", name: "யூடியூப்", action: "யூடியூபில் பாருங்கள்" },
+  { key: "instagram", name: "இன்ஸ்டாகிராம்", action: "இன்ஸ்டாகிராமில் பின்தொடருங்கள்" },
+  { key: "x", name: "எக்ஸ் (ட்விட்டர்)", action: "எக்ஸ் தளத்தில் பின்தொடருங்கள்" },
 ];
 
 const isSafeUrl = (url: string) => {
@@ -37,7 +37,7 @@ export function SocialLinks({ variant = "row", tone = "light" }: SocialLinksProp
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`${action} (opens in a new tab)`}
+                  aria-label={`${action} (புதிய தாவலில் திறக்கும்)`}
                   className={`${base} ${dark ? "text-paper hover:bg-white/10" : "text-ink hover:bg-white"}`}
                 >
                   <SocialIcon platform={key} />
@@ -45,8 +45,8 @@ export function SocialLinks({ variant = "row", tone = "light" }: SocialLinksProp
               ) : (
                 <span
                   className={`${base} opacity-45`}
-                  title={`${name} account coming soon`}
-                  aria-label={`${name} account coming soon`}
+                  title={`${name} கணக்கு விரைவில்`}
+                  aria-label={`${name} கணக்கு விரைவில்`}
                   role="img"
                 >
                   <SocialIcon platform={key} />
@@ -69,7 +69,7 @@ export function SocialLinks({ variant = "row", tone = "light" }: SocialLinksProp
             <SocialIcon platform={key} className="size-7 shrink-0" />
             <span>
               <span className="block font-semibold">{name}</span>
-              <span className="block text-sm opacity-75">{live ? action : "Account coming soon"}</span>
+              <span className="block text-sm opacity-75">{live ? action : "கணக்கு விரைவில்"}</span>
             </span>
           </>
         );
@@ -84,7 +84,7 @@ export function SocialLinks({ variant = "row", tone = "light" }: SocialLinksProp
                 className={`${cls} border-white/25 text-paper hover:bg-white/10`}
               >
                 {inner}
-                <span className="sr-only">(opens in a new tab)</span>
+                <span className="sr-only">(புதிய தாவலில் திறக்கும்)</span>
               </a>
             ) : (
               <div className={`${cls} border-dashed border-white/25 text-paper/70`}>{inner}</div>

@@ -6,8 +6,8 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata = {
   ...buildMetadata({
-    title: "Search",
-    description: "Search Teakadai Politics articles by title, topic or tag.",
+    title: "தேடல்",
+    description: "டீக்கடை அரசியல் கட்டுரைகளைத் தலைப்பு, பொருள், குறிச்சொல் மூலம் தேடுங்கள்.",
     path: "/search",
   }),
   robots: { index: false, follow: true },
@@ -17,9 +17,9 @@ export default async function SearchPage() {
   const [articles, categories] = await Promise.all([repository.getArticles(), repository.getCategories()]);
   return (
     <>
-      <PageIntro title="Search" />
+      <PageIntro title="தேடல்" />
       <div className="container-page">
-        <Suspense fallback={<p className="text-ink-soft">Loading search</p>}>
+        <Suspense fallback={<p className="text-ink-soft">தேடல் ஏற்றப்படுகிறது</p>}>
           <SearchView articles={articles} categories={categories} />
         </Suspense>
       </div>

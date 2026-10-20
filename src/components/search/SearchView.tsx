@@ -42,7 +42,7 @@ export function SearchView({ articles, categories }: { articles: Article[]; cate
     <div>
       <form role="search" onSubmit={(e) => e.preventDefault()} className="relative max-w-2xl">
         <label htmlFor="search-page-input" className="sr-only">
-          Search articles
+          கட்டுரைகளைத் தேடுங்கள்
         </label>
         <Search className="pointer-events-none absolute left-4 top-1/2 size-5 -translate-y-1/2 text-ink-soft" aria-hidden />
         <input
@@ -51,7 +51,7 @@ export function SearchView({ articles, categories }: { articles: Article[]; cate
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search by title, topic or tag"
+          placeholder="தலைப்பு, பொருள் அல்லது குறிச்சொல் மூலம் தேடுங்கள்"
           autoFocus
           className="w-full rounded-full border-2 border-ink bg-white py-3 pl-12 pr-14 text-lg focus:outline-offset-4 [&::-webkit-search-cancel-button]:hidden"
         />
@@ -62,23 +62,23 @@ export function SearchView({ articles, categories }: { articles: Article[]; cate
             className="absolute right-2 top-1/2 grid size-10 -translate-y-1/2 place-items-center rounded-full hover:bg-paper-deep"
           >
             <X className="size-5" aria-hidden />
-            <span className="sr-only">Clear search</span>
+            <span className="sr-only">தேடலை அழி</span>
           </button>
         )}
       </form>
 
       <p aria-live="polite" className="mt-4 text-sm text-ink-soft">
         {trimmed
-          ? `${results.length} ${results.length === 1 ? "result" : "results"} for “${trimmed}”`
-          : "Type a word to search article titles, summaries and tags."}
+          ? `“${trimmed}” தேடலுக்கு ${results.length} முடிவுகள்`
+          : "கட்டுரைத் தலைப்புகள், சுருக்கங்கள், குறிச்சொற்களில் தேட ஒரு சொல்லைத் தட்டச்சு செய்யுங்கள்."}
       </p>
 
       <div className="mt-8">
         {trimmed && results.length === 0 ? (
           <EmptyState
-            title="Nothing found"
-            message={`No articles match “${trimmed}”. Check the spelling, try a broader word such as “budget” or “election”, or browse all articles.`}
-            action={{ label: "Browse all articles", href: "/articles" }}
+            title="எதுவும் கிடைக்கவில்லை"
+            message={`“${trimmed}” என்ற தேடலுக்குக் கட்டுரைகள் இல்லை. எழுத்துப்பிழையைச் சரிபாருங்கள், “பட்ஜெட்” அல்லது “தேர்தல்” போன்ற பொதுவான சொல்லை முயலுங்கள், அல்லது எல்லாக் கட்டுரைகளையும் பாருங்கள்.`}
+            action={{ label: "எல்லாக் கட்டுரைகளும்", href: "/articles" }}
           />
         ) : (
           <ul className="max-w-3xl divide-y divide-rule">

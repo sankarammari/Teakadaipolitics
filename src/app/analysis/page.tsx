@@ -7,9 +7,9 @@ import { getArticlesByType, repository } from "@/lib/content";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Analysis and opinion",
+  title: "பகுப்பாய்வும் கருத்தும்",
   description:
-    "Political analysis, explainers and opinion on elections, government policy and public administration.",
+    "தமிழ்நாட்டுத் தேர்தல், அரசுக் கொள்கை, பொது நிர்வாகம் பற்றிய அரசியல் பகுப்பாய்வுகள், விளக்கங்கள், கருத்துக் கட்டுரைகள்.",
   path: "/analysis",
 });
 
@@ -22,11 +22,11 @@ export default async function AnalysisPage() {
   return (
     <>
       <PageIntro
-        title="Analysis and opinion"
-        description="Analysis explains what the evidence shows. Opinion argues a point of view. Each piece is labelled so you know which you are reading."
+        title="பகுப்பாய்வும் கருத்தும்"
+        description="பகுப்பாய்வு, சான்றுகள் என்ன சொல்கின்றன என்பதை விளக்கும். கருத்து, ஒரு நிலைப்பாட்டை வாதிடும். நீங்கள் எதைப் படிக்கிறீர்கள் என்று தெரிய, ஒவ்வொரு கட்டுரைக்கும் அடையாளம் உண்டு."
       >
         {topics.length > 0 && (
-          <nav aria-label="Analysis topics" className="mt-6">
+          <nav aria-label="பகுப்பாய்வுப் பொருள்கள்" className="mt-6">
             <ul className="flex flex-wrap gap-2">
               {topics.map((c) => (
                 <li key={c.id}>
@@ -46,14 +46,14 @@ export default async function AnalysisPage() {
       <div className="container-page">
         {featured ? (
           <>
-            <section aria-label="Featured analysis" className="mb-16 border-b border-rule pb-14">
+            <section aria-label="சிறப்புப் பகுப்பாய்வு" className="mb-16 border-b border-rule pb-14">
               <ArticleCard article={featured} variant="lead" categoryName={names.get(featured.category)} headingLevel="h2" priority />
             </section>
-            <h2 className="headline mb-6 text-[2rem]">All analysis and opinion</h2>
+            <h2 className="headline mb-6 text-[1.8rem]">எல்லாப் பகுப்பாய்வுகளும் கருத்துகளும்</h2>
             <ArticleBrowser articles={pieces} categories={categories} typeOptions={["analysis", "opinion"]} />
           </>
         ) : (
-          <EmptyState title="No analysis yet" message="Analysis and opinion pieces will appear here once published." />
+          <EmptyState title="இன்னும் பகுப்பாய்வுகள் இல்லை" message="பகுப்பாய்வு, கருத்துக் கட்டுரைகள் வெளியானதும் இங்கே தோன்றும்." />
         )}
       </div>
     </>

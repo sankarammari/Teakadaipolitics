@@ -2,12 +2,13 @@ import { EmptyState } from "@/components/common/EmptyState";
 import { PageIntro } from "@/components/common/PageIntro";
 import { SocialLinks } from "@/components/common/SocialLinks";
 import { VideoCard } from "@/components/video/VideoCard";
+import { anim, stagger } from "@/lib/anim";
 import { repository } from "@/lib/content";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Videos",
-  description: "Video commentary, explainers and conversations from the Teakadai Politics YouTube channel.",
+  title: "வீடியோ",
+  description: "டீக்கடை அரசியல் யூடியூப் சேனலின் அரசியல் விவாதங்கள், விளக்கங்கள், உரையாடல்கள்.",
   path: "/videos",
 });
 
@@ -20,8 +21,8 @@ export default async function VideosPage() {
   return (
     <>
       <PageIntro
-        title="Videos"
-        description="Conversations, explainers and walk-throughs from our YouTube channel."
+        title="வீடியோ"
+        description="எங்கள் யூடியூப் சேனலின் உரையாடல்கள், விளக்கங்கள், நேரடி அலசல்கள்."
       >
         <div className="mt-5">
           <SocialLinks />
@@ -31,13 +32,13 @@ export default async function VideosPage() {
       <div className="container-page">
         {featured ? (
           <>
-            <section aria-label="Featured video" className="mb-14 border-b border-rule pb-14">
+            <section {...anim("fadeUp")} aria-label="சிறப்பு வீடியோ" className="mb-14 border-b border-rule pb-14">
               <VideoCard video={featured} size="large" categoryName={names.get(featured.category)} headingLevel="h2" />
             </section>
             {rest.length > 0 && (
               <ul className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-                {rest.map((v) => (
-                  <li key={v.id}>
+                {rest.map((v, i) => (
+                  <li key={v.id} {...anim("fadeUp", stagger(i, 120))}>
                     <VideoCard video={v} categoryName={names.get(v.category)} headingLevel="h2" />
                   </li>
                 ))}
@@ -45,7 +46,7 @@ export default async function VideosPage() {
             )}
           </>
         ) : (
-          <EmptyState title="No videos yet" message="New videos will appear here once they are published." />
+          <EmptyState title="இன்னும் வீடியோக்கள் இல்லை" message="புதிய வீடியோக்கள் வெளியானதும் இங்கே தோன்றும்." />
         )}
       </div>
     </>

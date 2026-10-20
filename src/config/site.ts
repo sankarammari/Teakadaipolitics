@@ -3,13 +3,12 @@
  * instead of inside components.
  */
 export const siteConfig = {
-  name: "Teakadai Politics",
-  nameTamil: "டீக்கடை அரசியல்",
-  tagline: "Politics, argued over a glass of tea.",
+  name: "டீக்கடை அரசியல்",
+  tagline: "ஒரு கிளாஸ் டீ, ஒரு அரசியல் விவாதம்.",
   description:
-    "Teakadai Politics publishes current affairs, policy analysis, opinion and video commentary on Indian politics.",
+    "நடப்பு நிகழ்வுகள், கொள்கைப் பகுப்பாய்வு, கருத்துக் கட்டுரைகள், அரசியல் வீடியோக்கள்: தமிழ்நாட்டு அரசியலை டீக்கடை பெஞ்சிலிருந்து பேசும் இணைய இதழ்.",
   url: (process.env.NEXT_PUBLIC_SITE_URL || "https://teakadaipolitics.com").replace(/\/$/, ""),
-  locale: "en_IN",
+  locale: "ta_IN",
   contactEmail: "editor@teakadaipolitics.com",
 
   /**
@@ -33,10 +32,10 @@ export const siteConfig = {
 export type SocialPlatform = keyof typeof siteConfig.social;
 
 export const primaryNav = [
-  { label: "Latest", href: "/articles" },
-  { label: "Current affairs", href: "/category/current-affairs" },
-  { label: "Elections", href: "/category/elections" },
-  { label: "Policy", href: "/category/government-policy" },
-  { label: "Analysis", href: "/analysis" },
-  { label: "Videos", href: "/videos" },
+  { label: "சமீபத்தியவை", href: "/articles" },
+  { label: "நடப்பு நிகழ்வுகள்", href: "/category/current-affairs" },
+  { label: "தேர்தல்", href: "/category/elections" },
+  { label: "கொள்கை", href: "/category/government-policy" },
+  { label: "பகுப்பாய்வு", href: "/analysis" },
+  { label: "வீடியோ", href: "/videos" },
 ] as const;

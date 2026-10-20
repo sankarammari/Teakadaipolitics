@@ -24,10 +24,11 @@ export function VideoCard({ video, categoryName, headingLevel: Heading = "h3", s
         />
         <span
           aria-hidden
-          className={`absolute bottom-3 left-3 grid place-items-center rounded-full bg-paper text-ink shadow-sm ${
+          className={`absolute bottom-3 left-3 grid place-items-center rounded-full bg-paper text-ink shadow-sm transition-colors duration-300 group-hover:bg-tea group-hover:text-paper ${
             large ? "size-14" : "size-10"
           }`}
         >
+          <span className="play-ring absolute inset-0 rounded-full border-2 border-paper" />
           <Play className={large ? "size-6 translate-x-0.5" : "size-4 translate-x-px"} fill="currentColor" />
         </span>
         {video.durationLabel && (
@@ -37,7 +38,7 @@ export function VideoCard({ video, categoryName, headingLevel: Heading = "h3", s
         )}
       </div>
       {categoryName && <p className="text-sm font-semibold text-tea">{categoryName}</p>}
-      <Heading className={`headline ${large ? "text-[2rem] sm:text-[2.6rem]" : "text-[1.4rem]"}`}>
+      <Heading className={`headline ${large ? "text-[1.7rem] sm:text-[2.2rem]" : "text-[1.25rem]"}`}>
         <Link
           href={`/videos/${video.slug}`}
           className="after:absolute after:inset-0 group-hover:underline group-hover:decoration-tea group-hover:decoration-2 group-hover:underline-offset-4"

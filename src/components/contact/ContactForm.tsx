@@ -12,19 +12,19 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 function validate(values: Fields): Errors {
   const errors: Errors = {};
-  if (!values.name.trim()) errors.name = "Enter your name.";
-  if (!values.email.trim()) errors.email = "Enter your email address.";
-  else if (!EMAIL_PATTERN.test(values.email.trim())) errors.email = "Enter an email address like name@example.com.";
-  if (!values.subject.trim()) errors.subject = "Enter a subject.";
-  if (values.message.trim().length < 10) errors.message = "Write a message of at least 10 characters.";
+  if (!values.name.trim()) errors.name = "உங்கள் பெயரை உள்ளிடுங்கள்.";
+  if (!values.email.trim()) errors.email = "உங்கள் மின்னஞ்சல் முகவரியை உள்ளிடுங்கள்.";
+  else if (!EMAIL_PATTERN.test(values.email.trim())) errors.email = "name@example.com போன்ற சரியான மின்னஞ்சல் முகவரியை உள்ளிடுங்கள்.";
+  if (!values.subject.trim()) errors.subject = "பொருளை உள்ளிடுங்கள்.";
+  if (values.message.trim().length < 10) errors.message = "குறைந்தது 10 எழுத்துகள் கொண்ட செய்தியை எழுதுங்கள்.";
   return errors;
 }
 
 const labels: Record<keyof Fields, string> = {
-  name: "Name",
-  email: "Email",
-  subject: "Subject",
-  message: "Message",
+  name: "பெயர்",
+  email: "மின்னஞ்சல்",
+  subject: "பொருள்",
+  message: "செய்தி",
 };
 
 /**
@@ -93,8 +93,8 @@ export function ContactForm() {
     <div>
       {!endpoint && (
         <p className="mb-6 rounded-md bg-tea-light px-4 py-3 text-sm">
-          Online submission isn’t switched on yet. You can fill in the form to check your message, then send it by
-          email to <a className="font-semibold underline" href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>.
+          இணையவழிச் சமர்ப்பிப்பு இன்னும் தொடங்கப்படவில்லை. படிவத்தை நிரப்பி உங்கள் செய்தியைச் சரிபார்த்து, பிறகு மின்னஞ்சல் மூலம் அனுப்பலாம்:{" "}
+          <a className="font-semibold underline" href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>.
         </p>
       )}
 
@@ -124,7 +124,7 @@ export function ContactForm() {
 
         <div>
           <label htmlFor="subject" className="mb-1.5 block font-semibold">
-            Subject <span className="text-opinion" aria-hidden>*</span>
+            பொருள் <span className="text-opinion" aria-hidden>*</span>
           </label>
           <input
             id="subject"
@@ -141,7 +141,7 @@ export function ContactForm() {
 
         <div>
           <label htmlFor="message" className="mb-1.5 block font-semibold">
-            Message <span className="text-opinion" aria-hidden>*</span>
+            செய்தி <span className="text-opinion" aria-hidden>*</span>
           </label>
           <textarea
             id="message"
@@ -158,7 +158,7 @@ export function ContactForm() {
         </div>
 
         <p className="text-sm text-ink-soft">
-          <span className="text-opinion" aria-hidden>*</span> Required
+          <span className="text-opinion" aria-hidden>*</span> கட்டாயம்
         </p>
 
         <div>
@@ -167,7 +167,7 @@ export function ContactForm() {
             disabled={status === "sending"}
             className="rounded-full bg-ink px-6 py-2.5 font-semibold text-paper hover:bg-ink/85 disabled:opacity-60"
           >
-            {status === "sending" ? "Sending message" : endpoint ? "Send message" : "Check message"}
+            {status === "sending" ? "அனுப்பப்படுகிறது" : endpoint ? "செய்தியை அனுப்பு" : "செய்தியைச் சரிபார்"}
           </button>
         </div>
       </form>
@@ -175,27 +175,26 @@ export function ContactForm() {
       <div aria-live="polite" className="mt-6">
         {status === "offline" && (
           <div className="rounded-md border border-rule bg-white px-4 py-4">
-            <p className="font-semibold">Your message looks complete, but it has not been sent.</p>
+            <p className="font-semibold">உங்கள் செய்தி முழுமையாக உள்ளது, ஆனால் இன்னும் அனுப்பப்படவில்லை.</p>
             <p className="mt-1 text-sm text-ink-soft">
-              Online submission isn’t live yet. Open it in your email app to send it to {siteConfig.contactEmail}.
+              இணையவழிச் சமர்ப்பிப்பு இன்னும் செயல்படவில்லை. {siteConfig.contactEmail} முகவரிக்கு அனுப்ப, உங்கள் மின்னஞ்சல் செயலியில் திறந்துகொள்ளுங்கள்.
             </p>
             <a
               href={mailto}
               className="mt-3 inline-flex items-center gap-2 rounded-full border-2 border-ink px-4 py-1.5 text-sm font-semibold hover:bg-ink hover:text-paper"
             >
-              <Mail className="size-4" aria-hidden /> Open in email app
+              <Mail className="size-4" aria-hidden /> மின்னஞ்சல் செயலியில் திற
             </a>
           </div>
         )}
         {status === "sent" && (
           <p className="flex items-center gap-2 rounded-md bg-white px-4 py-3 font-semibold text-analysis">
-            <CheckCircle2 className="size-5" aria-hidden /> Message sent. We read every message, and reply when we can.
+            <CheckCircle2 className="size-5" aria-hidden /> செய்தி அனுப்பப்பட்டது. ஒவ்வொரு செய்தியையும் படிக்கிறோம்; இயன்றவரை பதில் அனுப்புவோம்.
           </p>
         )}
         {status === "failed" && (
           <p className="flex items-center gap-2 rounded-md bg-white px-4 py-3 font-semibold text-opinion">
-            <AlertCircle className="size-5" aria-hidden /> Your message wasn’t sent. Check your connection and try
-            again, or email {siteConfig.contactEmail}.
+            <AlertCircle className="size-5" aria-hidden /> உங்கள் செய்தி அனுப்பப்படவில்லை. இணைய இணைப்பைச் சரிபார்த்து மீண்டும் முயலுங்கள், அல்லது {siteConfig.contactEmail} முகவரிக்கு மின்னஞ்சல் அனுப்புங்கள்.
           </p>
         )}
       </div>

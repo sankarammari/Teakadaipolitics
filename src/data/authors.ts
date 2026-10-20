@@ -5,27 +5,27 @@ import type { Author } from "@/types";
 export const authors: Author[] = [
   {
     id: "a-desk",
-    name: "Teakadai Desk",
+    name: "டீக்கடை செய்திக்குழு",
     slug: "teakadai-desk",
-    bio: "Placeholder byline for desk-written sample pieces.",
+    bio: "செய்திக்குழு எழுதும் மாதிரிக் கட்டுரைகளுக்கான பொதுப் பெயர்.",
   },
   {
     id: "a-meena",
-    name: "Meena Raghavan",
+    name: "மீனா ராகவன்",
     slug: "meena-raghavan",
-    bio: "Fictional sample contributor used to preview analysis layouts.",
+    bio: "பகுப்பாய்வுப் பக்க வடிவமைப்பைக் காட்டுவதற்கான கற்பனை எழுத்தாளர்.",
   },
   {
     id: "a-arul",
-    name: "Arul Selvan",
+    name: "அருள் செல்வன்",
     slug: "arul-selvan",
-    bio: "Fictional sample contributor used to preview opinion layouts.",
+    bio: "கருத்துப் பக்க வடிவமைப்பைக் காட்டுவதற்கான கற்பனை எழுத்தாளர்.",
   },
   {
     id: "a-farhana",
-    name: "Farhana Iqbal",
+    name: "ஃபர்ஹானா இக்பால்",
     slug: "farhana-iqbal",
-    bio: "Fictional sample contributor used to preview news layouts.",
+    bio: "செய்திப் பக்க வடிவமைப்பைக் காட்டுவதற்கான கற்பனை செய்தியாளர்.",
   },
 ];
 

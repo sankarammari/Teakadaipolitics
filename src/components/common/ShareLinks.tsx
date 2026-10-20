@@ -16,7 +16,7 @@ export function ShareLinks({ url, title }: { url: string; title: string }) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      window.prompt("Copy this link", url);
+      window.prompt("இந்த இணைப்பை நகலெடுங்கள்", url);
     }
   };
 
@@ -25,15 +25,15 @@ export function ShareLinks({ url, title }: { url: string; title: string }) {
 
   return (
     <div className="flex flex-wrap items-center gap-2">
-      <span className="mr-1 text-sm font-semibold text-ink-soft">Share</span>
+      <span className="mr-1 text-sm font-semibold text-ink-soft">பகிர</span>
       <a
         className={btn}
         href={`https://wa.me/?text=${text}%20${link}`}
         target="_blank"
         rel="noopener noreferrer"
       >
-        <MessageCircle className="size-4" aria-hidden /> WhatsApp
-        <span className="sr-only">(opens in a new tab)</span>
+        <MessageCircle className="size-4" aria-hidden /> வாட்ஸ்அப்
+        <span className="sr-only">(புதிய தாவலில் திறக்கும்)</span>
       </a>
       <a
         className={btn}
@@ -41,15 +41,15 @@ export function ShareLinks({ url, title }: { url: string; title: string }) {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <SocialIcon platform="x" className="size-3.5" /> Post on X
-        <span className="sr-only">(opens in a new tab)</span>
+        <SocialIcon platform="x" className="size-3.5" /> எக்ஸ் தளத்தில்
+        <span className="sr-only">(புதிய தாவலில் திறக்கும்)</span>
       </a>
       <button type="button" className={btn} onClick={copy}>
         {copied ? <Check className="size-4" aria-hidden /> : <Link2 className="size-4" aria-hidden />}
-        {copied ? "Link copied" : "Copy link"}
+        {copied ? "இணைப்பு நகலெடுக்கப்பட்டது" : "இணைப்பை நகலெடு"}
       </button>
       <span className="sr-only" aria-live="polite">
-        {copied ? "Link copied to clipboard" : ""}
+        {copied ? "இணைப்பு நகலெடுக்கப்பட்டது" : ""}
       </span>
     </div>
   );

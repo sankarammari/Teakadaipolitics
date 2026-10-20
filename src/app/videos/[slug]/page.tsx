@@ -8,6 +8,7 @@ import { SectionHeader } from "@/components/common/SectionHeader";
 import { ShareLinks } from "@/components/common/ShareLinks";
 import { VideoCard } from "@/components/video/VideoCard";
 import { YouTubePlayer } from "@/components/video/YouTubePlayer";
+import { anim, stagger } from "@/lib/anim";
 import { getRelatedVideos, repository } from "@/lib/content";
 import { formatDate } from "@/lib/format";
 import { absoluteUrl, buildMetadata } from "@/lib/seo";
@@ -44,9 +45,9 @@ export default async function VideoPage({ params }: Props) {
   return (
     <>
       <div className="container-page pt-8 md:pt-12">
-        <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+        <nav {...anim("fade")} aria-label="பக்க வழி" className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
           <Link href="/videos" className="inline-flex items-center gap-1 font-semibold text-ink-soft hover:text-ink">
-            <ArrowLeft className="size-4" aria-hidden /> All videos
+            <ArrowLeft className="size-4" aria-hidden /> எல்லா வீடியோக்களும்
           </Link>
           {category && (
             <Link href={`/category/${category.slug}`} className="font-semibold text-tea hover:underline">
@@ -55,13 +56,13 @@ export default async function VideoPage({ params }: Props) {
           )}
         </nav>
 
-        <div className="mt-6 max-w-5xl">
+        <div {...anim("wipe", 150, 1200)} className="mt-6 max-w-5xl">
           <YouTubePlayer videoId={video.youtubeVideoId} title={video.title} thumbnail={video.thumbnail} />
           <PhotoCredit credit={video.thumbnailCredit} className="mt-2" />
         </div>
 
-        <div className="mt-8 max-w-3xl">
-          <h1 className="headline text-[2.3rem] sm:text-[3rem]">{video.title}</h1>
+        <div {...anim("fadeUp", 400)} className="mt-8 max-w-3xl">
+          <h1 className="headline text-[1.9rem] sm:text-[2.5rem]">{video.title}</h1>
           <p className="mt-3 flex flex-wrap gap-x-4 text-sm text-ink-soft">
             <span className="font-semibold text-ink">{video.channelName}</span>
             <time dateTime={video.publishedAt}>{formatDate(video.publishedAt)}</time>
@@ -77,7 +78,7 @@ export default async function VideoPage({ params }: Props) {
                 rel="noopener noreferrer"
                 className="inline-block font-semibold text-tea underline underline-offset-4"
               >
-                Watch on YouTube<span className="sr-only"> (opens in a new tab)</span>
+                யூடியூபில் பாருங்கள்<span className="sr-only"> (புதிய தாவலில் திறக்கும்)</span>
               </a>
             )}
             <ShareLinks url={absoluteUrl(`/videos/${video.slug}`)} title={video.title} />
@@ -87,10 +88,10 @@ export default async function VideoPage({ params }: Props) {
 
       {related.length > 0 && (
         <section aria-labelledby="more-videos" className="container-page mt-20">
-          <SectionHeader id="more-videos" title="More videos" href="/videos" linkLabel="All videos" />
+          <SectionHeader id="more-videos" title="மேலும் வீடியோக்கள்" href="/videos" linkLabel="எல்லா வீடியோக்களும்" />
           <ul className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-            {related.map((v) => (
-              <li key={v.id}>
+            {related.map((v, i) => (
+              <li key={v.id} {...anim("fadeUp", stagger(i, 120))}>
                 <VideoCard video={v} />
               </li>
             ))}

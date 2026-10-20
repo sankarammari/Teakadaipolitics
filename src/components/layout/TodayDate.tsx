@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const formatter = new Intl.DateTimeFormat("en-IN", {
+const formatter = new Intl.DateTimeFormat("ta-IN", {
   weekday: "long",
   day: "numeric",
   month: "long",
