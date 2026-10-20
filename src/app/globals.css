@@ -1,26 +1,100 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Brand tokens. Change colours here; components only use the token names. */
+@theme {
+  --color-paper: #f5f6f2;
+  --color-paper-deep: #e9ebe4;
+  --color-ink: #17202e;
+  --color-ink-soft: #4a5464;
+  --color-rule: #d5d9d0;
+  --color-tea: #9c5a12;
+  --color-tea-light: #f3e4cf;
+  --color-news: #1f4e8c;
+  --color-analysis: #1c6247;
+  --color-opinion: #8a2236;
+
+  --font-display: var(--font-anek), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-anek), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-source-serif), Georgia, serif;
+  --font-tamil: var(--font-anek-tamil), var(--font-anek), sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 5rem;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    overflow-x: hidden;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-tea);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--color-tea-light);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* Condensed headline voice, using Anek's width axis */
+  .headline {
+    font-family: var(--font-display);
+    font-stretch: 78%;
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  .container-page {
+    width: 100%;
+    max-width: 76rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 768px) {
+    .container-page {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  .link-quiet {
+    text-decoration-line: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.18em;
+    text-decoration-thickness: 2px;
+    transition: text-decoration-color 120ms;
+  }
+  .link-quiet:hover {
+    text-decoration-color: var(--color-tea);
+  }
+
+  /* Article reading column */
+  .prose-body {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    line-height: 1.72;
+    max-width: 40rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
