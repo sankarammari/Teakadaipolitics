@@ -1,5 +1,7 @@
 import { ExternalLink, FileCheck2, MessageSquareQuote } from "lucide-react";
 import { anim } from "@/lib/anim";
+import { ChartBlock } from "./ChartBlock";
+import { TimelineBlock } from "./TimelineBlock";
 import type { ContentBlock, SourceLink } from "@/types";
 
 function Source({ source }: { source: SourceLink }) {
@@ -76,7 +78,7 @@ function renderBlock(block: ContentBlock) {
 
     case "fact":
       return (
-        <aside aria-label="உறுதிசெய்யப்பட்ட தகவல்" className="rounded-md border-l-4 border-news bg-white px-5 py-4">
+        <aside aria-label="உறுதிசெய்யப்பட்ட தகவல்" className="rounded-md border-l-4 border-news bg-card px-5 py-4">
           <p className="flex items-center gap-1.5 font-sans text-sm font-bold text-news">
             <FileCheck2 className="size-4" aria-hidden /> உறுதிசெய்யப்பட்ட தகவல்
           </p>
@@ -87,7 +89,7 @@ function renderBlock(block: ContentBlock) {
 
     case "statement":
       return (
-        <figure className="rounded-md border-l-4 border-ink-soft bg-white px-5 py-4">
+        <figure className="rounded-md border-l-4 border-ink-soft bg-card px-5 py-4">
           <p className="flex items-center gap-1.5 font-sans text-sm font-bold text-ink-soft">
             <MessageSquareQuote className="size-4" aria-hidden /> கூறியவர் பெயருடன் மேற்கோள்
           </p>
@@ -99,5 +101,11 @@ function renderBlock(block: ContentBlock) {
           {block.source && <Source source={block.source} />}
         </figure>
       );
+
+    case "chart":
+      return <ChartBlock chart={block} />;
+
+    case "timeline":
+      return <TimelineBlock timeline={block} />;
   }
 }

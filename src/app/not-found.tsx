@@ -15,10 +15,10 @@ export default function NotFound() {
         <HeaderSearch id="notfound-search" />
       </div>
       <div className="mt-8 flex flex-wrap gap-3">
-        <Link href="/" className="rounded-full bg-ink px-5 py-2.5 font-semibold text-paper hover:bg-ink/85">
+        <Link href="/" className="rounded-full bg-night px-5 py-2.5 font-semibold text-on-night hover:bg-night/85">
           முகப்புப் பக்கம்
         </Link>
-        <Link href="/articles" className="rounded-full border-2 border-ink px-5 py-2 font-semibold hover:bg-ink hover:text-paper">
+        <Link href="/articles" className="rounded-full border-2 border-ink px-5 py-2 font-semibold hover:bg-night hover:text-on-night">
           எல்லாக் கட்டுரைகளும்
         </Link>
       </div>

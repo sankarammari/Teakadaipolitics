@@ -21,7 +21,7 @@ export function ShareLinks({ url, title }: { url: string; title: string }) {
   };
 
   const btn =
-    "inline-flex items-center gap-2 rounded-full border border-rule bg-white px-3.5 py-1.5 text-sm font-semibold text-ink hover:border-ink";
+    "inline-flex items-center gap-2 rounded-full border border-rule bg-card px-3.5 py-1.5 text-sm font-semibold text-ink hover:border-ink";
 
   return (
     <div className="flex flex-wrap items-center gap-2">

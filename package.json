@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@netlify/blobs": "^11.1.6",
+    "gray-matter": "^4.0.3",
     "lucide-react": "^1.60.0",
     "next": "15.5.28",
     "react": "19.1.0",

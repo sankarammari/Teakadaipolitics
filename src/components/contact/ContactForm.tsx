@@ -78,7 +78,7 @@ export function ContactForm() {
   };
 
   const input = (key: keyof Fields) =>
-    `w-full rounded-md border bg-white px-3.5 py-2.5 ${errors[key] ? "border-opinion" : "border-rule focus:border-ink"}`;
+    `w-full rounded-md border bg-card px-3.5 py-2.5 ${errors[key] ? "border-opinion" : "border-rule focus:border-ink"}`;
 
   const errorText = (key: keyof Fields) =>
     errors[key] && (
@@ -165,7 +165,7 @@ export function ContactForm() {
           <button
             type="submit"
             disabled={status === "sending"}
-            className="rounded-full bg-ink px-6 py-2.5 font-semibold text-paper hover:bg-ink/85 disabled:opacity-60"
+            className="rounded-full bg-night px-6 py-2.5 font-semibold text-on-night hover:bg-night/85 disabled:opacity-60"
           >
             {status === "sending" ? "அனுப்பப்படுகிறது" : endpoint ? "செய்தியை அனுப்பு" : "செய்தியைச் சரிபார்"}
           </button>
@@ -174,26 +174,26 @@ export function ContactForm() {
 
       <div aria-live="polite" className="mt-6">
         {status === "offline" && (
-          <div className="rounded-md border border-rule bg-white px-4 py-4">
+          <div className="rounded-md border border-rule bg-card px-4 py-4">
             <p className="font-semibold">உங்கள் செய்தி முழுமையாக உள்ளது, ஆனால் இன்னும் அனுப்பப்படவில்லை.</p>
             <p className="mt-1 text-sm text-ink-soft">
               இணையவழிச் சமர்ப்பிப்பு இன்னும் செயல்படவில்லை. {siteConfig.contactEmail} முகவரிக்கு அனுப்ப, உங்கள் மின்னஞ்சல் செயலியில் திறந்துகொள்ளுங்கள்.
             </p>
             <a
               href={mailto}
-              className="mt-3 inline-flex items-center gap-2 rounded-full border-2 border-ink px-4 py-1.5 text-sm font-semibold hover:bg-ink hover:text-paper"
+              className="mt-3 inline-flex items-center gap-2 rounded-full border-2 border-ink px-4 py-1.5 text-sm font-semibold hover:bg-night hover:text-on-night"
             >
               <Mail className="size-4" aria-hidden /> மின்னஞ்சல் செயலியில் திற
             </a>
           </div>
         )}
         {status === "sent" && (
-          <p className="flex items-center gap-2 rounded-md bg-white px-4 py-3 font-semibold text-analysis">
+          <p className="flex items-center gap-2 rounded-md bg-card px-4 py-3 font-semibold text-analysis">
             <CheckCircle2 className="size-5" aria-hidden /> செய்தி அனுப்பப்பட்டது. ஒவ்வொரு செய்தியையும் படிக்கிறோம்; இயன்றவரை பதில் அனுப்புவோம்.
           </p>
         )}
         {status === "failed" && (
-          <p className="flex items-center gap-2 rounded-md bg-white px-4 py-3 font-semibold text-opinion">
+          <p className="flex items-center gap-2 rounded-md bg-card px-4 py-3 font-semibold text-opinion">
             <AlertCircle className="size-5" aria-hidden /> உங்கள் செய்தி அனுப்பப்படவில்லை. இணைய இணைப்பைச் சரிபார்த்து மீண்டும் முயலுங்கள், அல்லது {siteConfig.contactEmail} முகவரிக்கு மின்னஞ்சல் அனுப்புங்கள்.
           </p>
         )}

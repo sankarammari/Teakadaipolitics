@@ -53,7 +53,7 @@ export function SearchView({ articles, categories }: { articles: Article[]; cate
           onChange={(e) => setQuery(e.target.value)}
           placeholder="தலைப்பு, பொருள் அல்லது குறிச்சொல் மூலம் தேடுங்கள்"
           autoFocus
-          className="w-full rounded-full border-2 border-ink bg-white py-3 pl-12 pr-14 text-lg focus:outline-offset-4 [&::-webkit-search-cancel-button]:hidden"
+          className="w-full rounded-full border-2 border-ink bg-card py-3 pl-12 pr-14 text-lg focus:outline-offset-4 [&::-webkit-search-cancel-button]:hidden"
         />
         {query && (
           <button

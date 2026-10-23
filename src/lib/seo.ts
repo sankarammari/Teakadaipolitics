@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/config/site";
-import type { Article } from "@/types";
+import type { Article, Category } from "@/types";
 
 interface PageMetaInput {
   title?: string;
@@ -75,5 +75,19 @@ export function articleJsonLd(article: Article) {
     publisher: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
     mainEntityOfPage: absoluteUrl(`/articles/${article.slug}`),
     keywords: article.tags.join(", "),
+  };
+}
+
+/** BreadcrumbList for article pages: Home › Category › Article. */
+export function breadcrumbJsonLd(article: Article, category?: Category) {
+  const crumbs = [
+    { name: siteConfig.name, url: absoluteUrl("/") },
+    ...(category ? [{ name: category.name, url: absoluteUrl(`/category/${category.slug}`) }] : []),
+    { name: article.title, url: absoluteUrl(`/articles/${article.slug}`) },
+  ];
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: crumbs.map((c, i) => ({ "@type": "ListItem", position: i + 1, name: c.name, item: c.url })),
   };
 }

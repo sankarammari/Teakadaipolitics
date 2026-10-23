@@ -27,7 +27,7 @@ export function VideoCard({ video, categoryName, headingLevel: Heading = "h3", s
         />
         <span
           aria-hidden
-          className={`absolute bottom-3 left-3 grid place-items-center rounded-full bg-paper text-ink shadow-sm transition-colors duration-300 group-hover:bg-tea group-hover:text-paper ${
+          className={`absolute bottom-3 left-3 grid place-items-center rounded-full bg-paper text-ink shadow-sm transition-colors duration-300 group-hover:bg-tea group-hover:text-on-night ${
             large ? "size-14" : "size-10"
           }`}
         >
@@ -36,12 +36,12 @@ export function VideoCard({ video, categoryName, headingLevel: Heading = "h3", s
         </span>
         {upcoming ? (
           <span className="absolute right-3 top-3 flex items-center gap-1.5 rounded-full bg-amber px-2.5 py-0.5 text-xs font-bold text-ink">
-            <span aria-hidden className="size-1.5 animate-pulse rounded-full bg-ink" />
+            <span aria-hidden className="size-1.5 animate-pulse rounded-full bg-night" />
             விரைவில்
           </span>
         ) : (
           video.durationLabel && (
-            <span className="absolute bottom-3 right-3 rounded bg-ink/85 px-2 py-0.5 text-xs font-semibold text-paper">
+            <span className="absolute bottom-3 right-3 rounded bg-night/85 px-2 py-0.5 text-xs font-semibold text-on-night">
               {video.durationLabel}
             </span>
           )

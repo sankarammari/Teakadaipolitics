@@ -59,7 +59,7 @@ export function ArticleBrowser({
     setVisible(pageSize);
   };
 
-  const field = "w-full rounded-md border border-rule bg-white px-3 py-2 text-[0.95rem] focus:border-ink";
+  const field = "w-full rounded-md border border-rule bg-card px-3 py-2 text-[0.95rem] focus:border-ink";
 
   return (
     <div>
@@ -152,7 +152,7 @@ export function ArticleBrowser({
           <button
             type="button"
             onClick={reset}
-            className="mt-5 rounded-full bg-ink px-5 py-2 text-sm font-semibold text-paper hover:bg-ink/85"
+            className="mt-5 rounded-full bg-night px-5 py-2 text-sm font-semibold text-on-night hover:bg-night/85"
           >
             வடிகட்டிகளை நீக்கு
           </button>
@@ -165,7 +165,7 @@ export function ArticleBrowser({
               <button
                 type="button"
                 onClick={() => setVisible((v) => v + pageSize)}
-                className="rounded-full border-2 border-ink px-6 py-2.5 font-semibold hover:bg-ink hover:text-paper"
+                className="rounded-full border-2 border-ink px-6 py-2.5 font-semibold hover:bg-night hover:text-on-night"
               >
                 மேலும் கட்டுரைகள்
               </button>

@@ -12,7 +12,7 @@ export function HeaderSearch({ id = "header-search" }: { id?: string }) {
         name="q"
         type="search"
         placeholder="தேடுங்கள்"
-        className="w-full rounded-full border border-rule bg-white py-1.5 pl-4 pr-10 text-sm placeholder:text-ink-soft/70 focus:border-ink md:w-52"
+        className="w-full rounded-full border border-rule bg-card py-1.5 pl-4 pr-10 text-sm placeholder:text-ink-soft/70 focus:border-ink md:w-52"
       />
       <button
         type="submit"

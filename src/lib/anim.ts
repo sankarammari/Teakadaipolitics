@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 
-export type AnimKind = "fade" | "fadeUp" | "foldLeft" | "drop" | "wipe" | "line";
+export type AnimKind = "fade" | "fadeUp" | "foldLeft" | "drop" | "wipe" | "line" | "grow";
 
 /**
  * Props that tag an element for the entrance animations in globals.css.

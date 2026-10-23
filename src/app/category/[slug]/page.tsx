@@ -38,7 +38,7 @@ export default async function CategoryPage({ params }: Props) {
                 <Link
                   href={`/category/${c.slug}`}
                   aria-current={c.id === category.id ? "page" : undefined}
-                  className="inline-block rounded-full border border-rule px-3.5 py-1 text-sm font-semibold hover:border-ink aria-[current=page]:border-ink aria-[current=page]:bg-ink aria-[current=page]:text-paper"
+                  className="inline-block rounded-full border border-rule px-3.5 py-1 text-sm font-semibold hover:border-ink aria-[current=page]:border-ink aria-[current=page]:bg-night aria-[current=page]:text-on-night"
                 >
                   {c.name}
                 </Link>

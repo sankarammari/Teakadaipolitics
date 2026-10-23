@@ -30,13 +30,13 @@ export function YouTubePlayer({ videoId, title, thumbnail }: YouTubePlayerProps)
 
   if (!embedUrl) {
     return (
-      <div className="relative aspect-video overflow-hidden rounded-lg bg-ink">
+      <div className="relative aspect-video overflow-hidden rounded-lg bg-night">
         <div className="opacity-40">{poster}</div>
-        <div className="absolute inset-0 grid place-items-center p-6 text-center text-paper">
+        <div className="absolute inset-0 grid place-items-center p-6 text-center text-on-night">
           <div>
             <BellRing className="mx-auto size-8 text-amber" aria-hidden />
             <p className="headline mt-2 text-2xl">இந்த வீடியோ விரைவில் வெளியாகும்</p>
-            <p className="mt-1 text-sm text-paper/80">புதிய வீடியோக்கள் வந்தவுடன் தெரிந்துகொள்ள சேனலை சப்ஸ்கிரைப் செய்யுங்கள்.</p>
+            <p className="mt-1 text-sm text-on-night/80">புதிய வீடியோக்கள் வந்தவுடன் தெரிந்துகொள்ள சேனலை சப்ஸ்கிரைப் செய்யுங்கள்.</p>
             {siteConfig.social.youtube && (
               <a
                 href={siteConfig.social.youtube}
@@ -56,7 +56,7 @@ export function YouTubePlayer({ videoId, title, thumbnail }: YouTubePlayerProps)
   }
 
   return (
-    <div className="relative aspect-video overflow-hidden rounded-lg bg-ink">
+    <div className="relative aspect-video overflow-hidden rounded-lg bg-night">
       {active ? (
         <iframe
           src={getYouTubeEmbedUrl(videoId, { autoplay: true }) ?? embedUrl}
@@ -72,7 +72,7 @@ export function YouTubePlayer({ videoId, title, thumbnail }: YouTubePlayerProps)
           <button
             type="button"
             onClick={() => setActive(true)}
-            className="group absolute inset-0 grid place-items-center bg-ink/20 hover:bg-ink/30"
+            className="group absolute inset-0 grid place-items-center bg-night/20 hover:bg-night/30"
           >
             <span className="grid size-20 place-items-center rounded-full bg-paper text-ink shadow-lg group-hover:scale-105 group-focus-visible:scale-105 motion-safe:transition-transform">
               <Play className="size-8 translate-x-0.5" fill="currentColor" aria-hidden />

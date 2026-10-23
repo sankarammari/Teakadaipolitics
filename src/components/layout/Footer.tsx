@@ -9,20 +9,20 @@ import { VisitCounter } from "./VisitCounter";
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="mt-20 bg-ink text-paper">
+    <footer className="mt-20 bg-night text-on-night">
       <div className="container-page grid gap-10 py-12 md:grid-cols-[1.3fr_1fr_1fr]">
         <div {...anim("fadeUp")}>
           <Link href="/" aria-label={`${siteConfig.name}, முகப்புப் பக்கம்`} className="inline-block">
             <BrandMark size="md" tone="dark" />
           </Link>
-          <p className="mt-4 max-w-xs text-sm text-paper/75">{siteConfig.tagline}</p>
+          <p className="mt-4 max-w-xs text-sm text-on-night/75">{siteConfig.tagline}</p>
           <div className="mt-5">
             <SocialLinks tone="dark" />
           </div>
         </div>
 
         <nav {...anim("fadeUp", 120)} aria-label="பிரிவுகள்">
-          <h2 className="text-sm font-semibold text-paper/60">பிரிவுகள்</h2>
+          <h2 className="text-sm font-semibold text-on-night/60">பிரிவுகள்</h2>
           <ul className="mt-3 space-y-2 text-[0.95rem]">
             {categories.map((c) => (
               <li key={c.id}>
@@ -35,7 +35,7 @@ export function Footer() {
         </nav>
 
         <nav {...anim("fadeUp", 240)} aria-label="இதழ் பற்றி">
-          <h2 className="text-sm font-semibold text-paper/60">இதழ்</h2>
+          <h2 className="text-sm font-semibold text-on-night/60">இதழ்</h2>
           <ul className="mt-3 space-y-2 text-[0.95rem]">
             <li><Link href="/analysis" className="link-quiet">பகுப்பாய்வு</Link></li>
             <li><Link href="/videos" className="link-quiet">வீடியோ</Link></li>
@@ -49,7 +49,7 @@ export function Footer() {
       </div>
       <div className="border-t border-white/15">
         <div className="container-page flex flex-wrap items-center justify-between gap-x-6 gap-y-3 py-5 pr-20 xl:pr-6">
-          <p className="text-sm text-paper/60">
+          <p className="text-sm text-on-night/60">
             © {year} {siteConfig.name}.{" "}
             {siteConfig.sampleContent && "இந்தத் தளத்தில் தற்போது உள்ள கட்டுரைகளும் வீடியோக்களும் மாதிரி உள்ளடக்கம் மட்டுமே."}
           </p>

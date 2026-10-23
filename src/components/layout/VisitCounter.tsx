@@ -56,7 +56,7 @@ export function VisitCounter() {
   if (total === null) return null;
 
   return (
-    <p className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-sm text-paper/80">
+    <p className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-sm text-on-night/80">
       <Eye className="size-4 text-amber" aria-hidden />
       <span>Total Visitors</span>
       <span className="font-brand text-base font-bold tabular-nums tracking-wide text-amber [font-stretch:85%]">

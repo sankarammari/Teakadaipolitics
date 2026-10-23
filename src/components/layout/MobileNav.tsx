@@ -63,7 +63,7 @@ export function MobileNav({ items }: { items: readonly NavItem[] }) {
         aria-expanded={open}
         aria-controls="mobile-nav"
         onClick={() => setOpen((v) => !v)}
-        className="grid size-11 place-items-center rounded-full border border-rule bg-white text-ink"
+        className="grid size-11 place-items-center rounded-full border border-rule bg-card text-ink"
       >
         <Menu className="size-5" aria-hidden />
         <span className="sr-only">மெனுவைத் திற</span>
@@ -86,7 +86,7 @@ export function MobileNav({ items }: { items: readonly NavItem[] }) {
                 setOpen(false);
                 buttonRef.current?.focus();
               }}
-              className="grid size-11 place-items-center rounded-full border border-rule bg-white text-ink"
+              className="grid size-11 place-items-center rounded-full border border-rule bg-card text-ink"
             >
               <X className="size-5" aria-hidden />
               <span className="sr-only">மெனுவை மூடு</span>

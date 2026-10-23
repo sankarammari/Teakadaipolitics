@@ -14,12 +14,59 @@
   --color-opinion: #8a2236;
   /* Logo amber, for use on dark backgrounds only */
   --color-amber: #f4a81d;
+  /* Raised surfaces (cards, inputs) and dark bands (footer, ticker, buttons) */
+  --color-card: #ffffff;
+  --color-night: #17202e;
+  --color-on-night: #f5f6f2;
 
   --font-display: var(--font-anek-tamil), "Nirmala UI", "Latha", sans-serif;
   --font-sans: var(--font-anek-tamil), "Nirmala UI", "Latha", sans-serif;
   --font-serif: var(--font-serif-tamil), "Nirmala UI", "Latha", serif;
   --font-tamil: var(--font-anek-tamil), "Nirmala UI", sans-serif;
   --font-brand: var(--font-brand-latin), "Arial Narrow", sans-serif;
+}
+
+/* Dark theme: an explicit choice (html[data-theme="dark"]) or the system
+   setting when the reader hasn't chosen. Components only use the tokens. */
+@layer base {
+  :root[data-theme="dark"] {
+    --color-paper: #10151d;
+    --color-paper-deep: #1a212c;
+    --color-ink: #e6e9ee;
+    --color-ink-soft: #a6afbc;
+    --color-rule: #2b3442;
+    --color-tea: #e3a457;
+    --color-tea-light: #2a2216;
+    --color-news: #86b3f5;
+    --color-analysis: #5fcf9f;
+    --color-opinion: #f28ea5;
+    --color-card: #161d27;
+    --color-night: #1f2936;
+    --color-on-night: #eef0f2;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --color-paper: #10151d;
+      --color-paper-deep: #1a212c;
+      --color-ink: #e6e9ee;
+      --color-ink-soft: #a6afbc;
+      --color-rule: #2b3442;
+      --color-tea: #e3a457;
+      --color-tea-light: #2a2216;
+      --color-news: #86b3f5;
+      --color-analysis: #5fcf9f;
+      --color-opinion: #f28ea5;
+      --color-card: #161d27;
+      --color-night: #1f2936;
+      --color-on-night: #eef0f2;
+      color-scheme: dark;
+    }
+  }
+
+  /* Reader text size (அ- / அ+), set on <html> and remembered per browser */
+  :root[data-font="lg"] { --reader-scale: 1.12; }
+  :root[data-font="xl"] { --reader-scale: 1.25; }
 }
 
 @layer base {
@@ -31,6 +78,7 @@
   body {
     background: var(--color-paper);
     color: var(--color-ink);
+    transition: background-color 300ms ease, color 300ms ease;
     font-family: var(--font-sans);
     font-size: 1.0625rem;
     /* Tamil vowel signs sit above and below the line; give them room */
@@ -85,7 +133,7 @@
   /* Article reading column */
   .prose-body {
     font-family: var(--font-serif);
-    font-size: 1.1rem;
+    font-size: calc(1.1rem * var(--reader-scale, 1));
     line-height: 1.9;
     max-width: 42rem;
   }
@@ -127,6 +175,10 @@
   from { transform: scaleX(0); }
   to { transform: scaleX(1); }
 }
+@keyframes tp-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
 @keyframes tp-marquee { to { transform: translateX(-50%); } }
 @keyframes tp-pulse {
   0% { box-shadow: 0 0 0 0 rgb(255 255 255 / 0.75); }
@@ -145,6 +197,7 @@
    counts the target's own clip-path, so a clipped frame would never start */
 [data-anim="wipe"] { --anim-name: none; }
 [data-anim="line"] { --anim-name: none; }
+[data-anim="grow"] { --anim-name: tp-grow; transform-origin: left; }
 /* Scrolling up: elements re-enter from above, so they drop in instead of rising */
 [data-anim-from="top"] { --anim-distance: -28px; }
 
@@ -157,6 +210,7 @@
   html[data-anim-on] [data-anim="wipe"]:not([data-anim-state="done"]) { opacity: 1; }
   html[data-anim-on] [data-anim="wipe"]:not([data-anim-state="done"]) > * { clip-path: inset(0 100% 0 0); }
   html[data-anim-on] [data-anim="line"]:not([data-anim-state="done"]) { opacity: 1; }
+  html[data-anim-on] [data-anim="grow"]:not([data-anim-state="done"]) { opacity: 1; transform: scaleX(0); }
   html[data-anim-on] [data-anim="line"]:not([data-anim-state="done"])::after { transform: scaleX(0); }
 
   [data-anim][data-anim-state="in"] {
@@ -202,7 +256,7 @@
 }
 html[data-scrolled] .site-nav {
   box-shadow: 0 6px 18px -12px rgb(23 32 46 / 0.45);
-  background-color: rgb(245 246 242 / 0.97);
+  background-color: color-mix(in srgb, var(--color-paper) 97%, transparent);
   backdrop-filter: blur(10px);
 }
 .nav-mark {
@@ -216,6 +270,34 @@ html[data-scrolled] .nav-mark {
   max-width: 14rem;
   opacity: 1;
   margin-inline-end: 1.5rem;
+}
+
+/* Page transition: every route eases in (app/template.tsx) */
+@keyframes tp-page-enter {
+  from { opacity: 0; transform: translateY(14px); filter: blur(3px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .page-enter {
+    animation: tp-page-enter 520ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+}
+
+/* Paragraph currently being read aloud */
+.reading-now {
+  background: color-mix(in srgb, var(--color-tea) 14%, transparent);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--color-tea) 14%, transparent);
+  border-radius: 4px;
+  transition: background-color 300ms ease;
+}
+
+/* Theme toggle: show the sun in dark mode (to go light) and the moon in light mode */
+.theme-icon-sun { display: none; }
+:root[data-theme="dark"] .theme-icon-sun { display: block; }
+:root[data-theme="dark"] .theme-icon-moon { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-icon-sun { display: block; }
+  :root:not([data-theme="light"]) .theme-icon-moon { display: none; }
 }
 
 /* Make room for the compact wordmark on narrower desktops */
@@ -239,27 +321,9 @@ html[data-scrolled] .nav-mark {
   animation: tp-pulse 1.6s ease-out infinite;
 }
 
-/* ------------------------------------------------------------
-   Photo hover effects (.img-fx frames, inside a .group card):
-   the photo zooms to 1.2x (CoverImage hoverZoom) while a light
-   sheen (::after) sweeps across once
-   ------------------------------------------------------------ */
-.img-fx::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background: linear-gradient(105deg, transparent 35%, rgb(255 255 255 / 0.35) 50%, transparent 65%);
-  transform: translateX(-120%);
-}
+/* Photo hover: the photo zooms to 1.2x inside its frame (CoverImage hoverZoom) */
 .img-fx img {
   transition: transform 700ms cubic-bezier(0.22, 0.61, 0.36, 1);
-}
-.group:hover .img-fx::after,
-.group:focus-within .img-fx::after {
-  transform: translateX(120%);
-  transition: transform 900ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 /* Cards lift slightly on hover */

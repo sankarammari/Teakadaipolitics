@@ -8,6 +8,8 @@ import type { Article } from "@/types";
 import { HeaderSearch } from "./HeaderSearch";
 import { MobileNav } from "./MobileNav";
 import { NavLinks } from "./NavLinks";
+import { SavedLink } from "./SavedLink";
+import { ThemeToggle } from "./ThemeToggle";
 import { TodayDate } from "./TodayDate";
 
 function TickerItems({ items, copy }: { items: Article[]; copy?: boolean }) {
@@ -31,15 +33,15 @@ export async function Header() {
   return (
     <header className="contents">
       {/* Date + scrolling latest headlines */}
-      <div className="bg-ink text-paper">
+      <div className="bg-night text-on-night">
         <div className="container-page flex items-center gap-4 py-2 text-[0.85rem]">
-          <span className="hidden shrink-0 text-paper/70 sm:block">
+          <span className="hidden shrink-0 text-on-night/70 sm:block">
             <TodayDate />
           </span>
           {latest.length > 0 && (
             <div className="flex min-w-0 flex-1 items-center gap-3 sm:border-l sm:border-white/20 sm:pl-4">
               <span className="flex shrink-0 items-center gap-1.5 rounded-sm bg-tea px-1.5 py-px text-xs font-bold">
-                <span aria-hidden className="live-dot size-1.5 rounded-full bg-white" />
+                <span aria-hidden className="live-dot size-1.5 rounded-full bg-card" />
                 சமீபத்திய
               </span>
               <div className="ticker min-w-0 flex-1 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_4%,#000_96%,transparent)]">
@@ -63,7 +65,11 @@ export async function Header() {
             <p className="max-w-xs text-right text-sm leading-snug text-ink-soft">{siteConfig.tagline}</p>
             <SocialLinks />
           </div>
-          <MobileNav items={primaryNav} />
+          <div className="flex items-center gap-2 lg:hidden">
+            <SavedLink />
+            <ThemeToggle />
+            <MobileNav items={primaryNav} />
+          </div>
         </div>
       </div>
 
@@ -76,8 +82,12 @@ export async function Header() {
             </Link>
             <NavLinks items={primaryNav} />
           </div>
-          <div className="nav-search">
-            <HeaderSearch />
+          <div className="flex items-center gap-2">
+            <div className="nav-search">
+              <HeaderSearch />
+            </div>
+            <SavedLink />
+            <ThemeToggle />
           </div>
         </div>
       </nav>

@@ -3,6 +3,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArticleBody } from "@/components/article/ArticleBody";
+import { BookmarkButton } from "@/components/article/BookmarkButton";
+import { FontSizeControl } from "@/components/article/FontSizeControl";
+import { ReadAloud } from "@/components/article/ReadAloud";
 import { ArticleGrid } from "@/components/article/ArticleGrid";
 import { ContentTypeBadge } from "@/components/common/ContentTypeBadge";
 import { CoverImage } from "@/components/common/CoverImage";
@@ -14,7 +17,7 @@ import { siteConfig } from "@/config/site";
 import { anim } from "@/lib/anim";
 import { getRelatedArticles, getTrendingArticles, repository } from "@/lib/content";
 import { formatDate, readingTimeLabel } from "@/lib/format";
-import { absoluteUrl, articleJsonLd, buildMetadata } from "@/lib/seo";
+import { absoluteUrl, articleJsonLd, breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -64,6 +67,7 @@ export default async function ArticlePage({ params }: Props) {
   return (
     <article>
       <div aria-hidden className="reading-progress fixed inset-x-0 top-0 z-50 h-1 bg-tea" />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd(article, category)) }} />
       {jsonLd && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       )}
@@ -90,16 +94,24 @@ export default async function ArticlePage({ params }: Props) {
           <p {...anim("fadeUp", 380)} className="mt-4 max-w-3xl font-serif text-xl leading-relaxed text-ink-soft">{article.excerpt}</p>
         </div>
 
-        <div {...anim("fade", 520)} className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 border-y border-rule py-3 text-sm">
-          <p className="text-ink-soft">
-            வெளியீடு: <time dateTime={article.publishedAt}>{formatDate(article.publishedAt)}</time>
-          </p>
-          {article.updatedAt && (
+        <div {...anim("fade", 520)} className="mt-6 flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-y border-rule py-3 text-sm">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-1">
             <p className="text-ink-soft">
-              புதுப்பிப்பு: <time dateTime={article.updatedAt}>{formatDate(article.updatedAt)}</time>
+              வெளியீடு: <time dateTime={article.publishedAt}>{formatDate(article.publishedAt)}</time>
             </p>
-          )}
-          <p className="text-ink-soft">{readingTimeLabel(article.readingTime)}</p>
+            {article.updatedAt && (
+              <p className="text-ink-soft">
+                புதுப்பிப்பு: <time dateTime={article.updatedAt}>{formatDate(article.updatedAt)}</time>
+              </p>
+            )}
+            <p className="text-ink-soft">{readingTimeLabel(article.readingTime)}</p>
+          </div>
+          {/* Reader tools: text size, listen, save for later */}
+          <div className="flex flex-wrap items-center gap-2">
+            <FontSizeControl />
+            <ReadAloud />
+            <BookmarkButton slug={article.slug} />
+          </div>
         </div>
       </header>
 

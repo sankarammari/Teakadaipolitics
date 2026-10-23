@@ -5,6 +5,7 @@ import { ScrollAnimations } from "@/components/common/ScrollAnimations";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { siteConfig } from "@/config/site";
+import { PREFERENCES_SCRIPT } from "@/lib/preferences";
 import { SCROLL_ANIMATION_SCRIPT } from "@/lib/scroll-animations";
 import "./globals.css";
 
@@ -48,16 +49,23 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#17202e",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f5f6f2" },
+    { media: "(prefers-color-scheme: dark)", color: "#10151d" },
+  ],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ta" className={`${anekTamil.variable} ${archivo.variable} ${notoSerifTamil.variable}`} suppressHydrationWarning>
+      <head>
+        {/* Apply the saved theme and text size before the first paint */}
+        <script dangerouslySetInnerHTML={{ __html: PREFERENCES_SCRIPT }} />
+      </head>
       <body id="top" className="flex min-h-dvh flex-col antialiased">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-night focus:px-4 focus:py-2 focus:text-on-night"
         >
           உள்ளடக்கத்துக்குச் செல்ல
         </a>
@@ -68,7 +76,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Footer />
         <a
           href="#top"
-          className="to-top fixed bottom-5 right-5 z-30 grid size-12 place-items-center rounded-full bg-ink text-paper shadow-lg hover:bg-tea"
+          className="to-top fixed bottom-5 right-5 z-30 grid size-12 place-items-center rounded-full bg-night text-on-night shadow-lg hover:bg-tea"
         >
           <ArrowUp className="size-5" aria-hidden />
           <span className="sr-only">மேலே செல்ல</span>

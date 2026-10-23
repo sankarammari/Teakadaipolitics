@@ -36,7 +36,7 @@ export function BrandMark({ size = "lg", tone = "light", priority = false }: Bra
       <span className="flex flex-col leading-none">
         <span
           className={`font-brand font-black uppercase tracking-[-0.01em] [font-stretch:72%] ${s.top} ${
-            dark ? "text-paper" : "text-ink"
+            dark ? "text-on-night" : "text-ink"
           }`}
         >
           Teakadai

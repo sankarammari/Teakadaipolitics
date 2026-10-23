@@ -28,7 +28,18 @@ export type ContentBlock =
       speaker: string;
       role?: string;
       source?: SourceLink;
-    };
+    }
+  /** Horizontal bar chart; bars grow in when scrolled into view. */
+  | {
+      type: "chart";
+      title: string;
+      unit?: string;
+      bars: { label: string; value: number; display?: string; highlight?: boolean }[];
+      note?: string;
+      source?: SourceLink;
+    }
+  /** Dated sequence of events, oldest first. */
+  | { type: "timeline"; title?: string; items: { date: string; text: string }[] };
 
 export interface Article {
   id: string;
@@ -50,6 +61,6 @@ export interface Article {
   status: PublishStatus;
   contentType: ContentType;
   sources?: SourceLink[];
-  /** Mock-only popularity signal used for the "Bench talk" list. */
+  /** Popularity signal used for the "Bench talk" list until real analytics exist. */
   trendingScore?: number;
 }

@@ -40,7 +40,7 @@ export function SocialLinks({ variant = "row", tone = "light" }: SocialLinksProp
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${action} (புதிய தாவலில் திறக்கும்)`}
-                  className={`${base} ${dark ? "text-paper" : "text-ink"} ${hover} transition-[background-color,border-color,color,transform] duration-200 hover:-translate-y-0.5 hover:text-white`}
+                  className={`${base} ${dark ? "text-on-night" : "text-ink"} ${hover} transition-[background-color,border-color,color,transform] duration-200 hover:-translate-y-0.5 hover:text-white`}
                 >
                   <SocialIcon platform={key} />
                 </a>
@@ -83,13 +83,13 @@ export function SocialLinks({ variant = "row", tone = "light" }: SocialLinksProp
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${cls} border-white/25 text-paper transition-[background-color,border-color,transform] duration-200 hover:-translate-y-0.5 ${hover}`}
+                className={`${cls} border-white/25 text-on-night transition-[background-color,border-color,transform] duration-200 hover:-translate-y-0.5 ${hover}`}
               >
                 {inner}
                 <span className="sr-only">(புதிய தாவலில் திறக்கும்)</span>
               </a>
             ) : (
-              <div className={`${cls} border-dashed border-white/25 text-paper/70`}>{inner}</div>
+              <div className={`${cls} border-dashed border-white/25 text-on-night/70`}>{inner}</div>
             )}
           </li>
         );

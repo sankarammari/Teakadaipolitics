@@ -3,9 +3,11 @@ import { ArticleCard } from "@/components/article/ArticleCard";
 import { ArticleGrid } from "@/components/article/ArticleGrid";
 import { EmptyState } from "@/components/common/EmptyState";
 import { SectionHeader } from "@/components/common/SectionHeader";
+import { NumberCards } from "@/components/common/NumberCards";
 import { SocialLinks } from "@/components/common/SocialLinks";
 import { VideoCard } from "@/components/video/VideoCard";
 import { getArticlesByCategory, getArticlesByType, getTrendingArticles, repository } from "@/lib/content";
+import { weekNumbers } from "@/data/numbers";
 import { anim, stagger } from "@/lib/anim";
 import { readingTimeLabel } from "@/lib/format";
 import { buildMetadata } from "@/lib/seo";
@@ -91,6 +93,12 @@ export default async function HomePage() {
         </section>
       )}
 
+      {/* This week in numbers */}
+      <section aria-labelledby="numbers-heading" className="container-page mt-16">
+        <SectionHeader id="numbers-heading" title="இந்த வாரம் எண்களில்" description="செய்திகளுக்குப் பின்னால் உள்ள எண்கள்." />
+        <NumberCards items={weekNumbers} />
+      </section>
+
       {/* Latest */}
       <section aria-labelledby="latest-heading" className="container-page mt-16">
         <SectionHeader id="latest-heading" title="மேலும் செய்திகள்" href="/articles" linkLabel="எல்லாக் கட்டுரைகளும்" />
@@ -174,7 +182,7 @@ export default async function HomePage() {
 
       {/* Follow */}
       <section aria-labelledby="follow-heading" className="container-page mt-16">
-        <div {...anim("fadeUp")} className="relative overflow-hidden rounded-xl bg-ink px-6 py-10 text-paper md:px-10">
+        <div {...anim("fadeUp")} className="relative overflow-hidden rounded-xl bg-night px-6 py-10 text-on-night md:px-10">
           {/* Oversized wordmark drifting behind the panel */}
           <div aria-hidden className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 select-none opacity-[0.06]">
             <div className="ticker-track [--ticker-duration:60s]">
@@ -188,7 +196,7 @@ export default async function HomePage() {
           <h2 {...anim("fadeUp", 150)} id="follow-heading" className="headline relative text-[2rem] md:text-[2.4rem]">
             பெஞ்சில் வந்து உட்காருங்கள்
           </h2>
-          <p {...anim("fadeUp", 250)} className="relative mt-2 max-w-xl text-paper/80">
+          <p {...anim("fadeUp", 250)} className="relative mt-2 max-w-xl text-on-night/80">
             புதிய வீடியோக்கள், சுருக்கமான கருத்துகள், ஒவ்வொரு புதிய கட்டுரைக்குமான இணைப்புகள்: Teakadai Politics-ஐப் பின்தொடருங்கள்.
           </p>
           <div {...anim("fadeUp", 400)} className="relative mt-6">

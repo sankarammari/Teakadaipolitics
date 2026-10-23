@@ -21,7 +21,7 @@ const FALLBACK = "/images/fallback.svg";
 
 /**
  * Fixed-ratio image that swaps to a neutral placeholder if the source fails.
- * Inside a `.group` card it gets the hover effects from `.img-fx` in globals.css.
+ * Inside a `.group` card the photo zooms to 1.2x on hover (`.img-fx` in globals.css).
  */
 export function CoverImage({
   src,

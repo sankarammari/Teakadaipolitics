@@ -59,8 +59,8 @@ Entrance and scroll effects use the same model as the DoctorProject site: elemen
 and an inline script (`src/lib/scroll-animations.ts`, added at the end of `<body>`) reveals them with an
 IntersectionObserver. Reveals run in both scroll directions: an element that leaves the screen re-arms and animates
 again when it returns, from the side it re-enters (`data-anim-once` opts out). Put `data-anim-children="fadeUp"` on a
-container to stagger all its children without per-element markup. Photos inside `.group` cards zoom to 1.2x on hover
-with a light sheen; cards with `card-lift` rise slightly. The same script drives the sticky header state, reading
+container to stagger all its children without per-element markup. Photos inside `.group` cards zoom to 1.2x on hover;
+cards with `card-lift` rise slightly. The same script drives the sticky header state, reading
 progress bar and scroll scaling (`data-motion-scale`). Content is never hidden unless the script runs,
 new nodes are picked up automatically, and `prefers-reduced-motion` turns everything off. Keyframes and rules
 are under "Motion system" in `globals.css`.
@@ -68,8 +68,9 @@ are under "Motion system" in `globals.css`.
 ## Project structure
 
 ```text
+content/articles/        One Markdown file per article (format: content/README.md)
 src/
-  app/                  Routes (App Router), sitemap.ts, robots.ts, opengraph-image.tsx
+  app/                  Routes (App Router), sitemap, robots, manifest, share images, api/visits
   components/
     layout/             Header, mobile menu, footer, nav, header search
     article/            Cards, grid, typed body renderer, filter/sort/load-more browser
@@ -78,7 +79,7 @@ src/
     contact/            Contact form
     common/             Badges, cover image with fallback, social links, notices, empty states
   config/site.ts        Publication settings
-  data/                 Mock articles, authors, categories, videos (SAMPLE CONTENT)
+  data/                 Article loader, authors, categories, videos, homepage numbers, photo credits
   lib/
     repository.ts       ContentRepository interface (the content contract)
     mock-repository.ts  Phase 1 implementation over src/data
@@ -86,6 +87,9 @@ src/
     search.ts           Client-side search, filter and sort
     seo.ts              Metadata builder and article JSON-LD
     youtube.ts          YouTube id/URL validation and embed URL helper
+    markdown.ts         Article body parser (Markdown → content blocks)
+    bookmarks.ts        "Read later" list in localStorage
+    preferences.ts      Theme and text-size preferences
   types/                Article, Author, Category, Video, ContentBlock
 scripts/                Placeholder image generator
 ```
@@ -93,12 +97,15 @@ scripts/                Placeholder image generator
 ## Routes
 
 `/`, `/articles`, `/articles/[slug]`, `/category/[slug]`, `/analysis`, `/videos`, `/videos/[slug]`, `/search?q=`,
-`/about`, `/contact`, `/privacy-policy`, `/terms`, plus a custom 404. Dynamic routes are generated from the data with
+`/about`, `/contact`, `/privacy-policy`, `/terms`, `/credits`, `/saved`, plus a custom 404. Dynamic routes are generated from the data with
 `generateStaticParams` and `dynamicParams = false`, so unknown slugs return the 404 page.
 
 ## Content
 
-- **Articles** use typed `content` blocks (`paragraph`, `heading`, `list`, `quote`, `fact`, `statement`) instead of HTML.
+- **Writing articles**: add a Markdown file to `content/articles/` (see `content/README.md` for the template, charts and
+  timelines). No code changes are needed; the build checks every file and names any mistake.
+- **Articles** are parsed into typed `content` blocks (`paragraph`, `heading`, `list`, `quote`, `fact`, `statement`,
+  `chart`, `timeline`) instead of HTML.
   `fact` blocks render as "Reported fact" with an optional source; `statement` blocks render as "Attributed statement" with
   the speaker. Every article is labelled News, Analysis or Opinion, and analysis/opinion pages carry an explanatory note.
 - Only `status: "published"` articles are shown. Bylines are not displayed; every piece runs under the desk.
@@ -111,9 +118,18 @@ scripts/                Placeholder image generator
   credit entry. Broken images fall back to `public/images/fallback.svg`; `npm run placeholders` makes SVG covers for
   any mock slug without a photo.
 
-The articles in `src/data/articles.ts` are original Tamil summaries of Tamil Nadu political news from 11–23 October 2026,
+The articles in `content/articles/` are original Tamil summaries of Tamil Nadu political news from 11–23 October 2026,
 each linking the reports it is based on. Quotes are translated and attributed. Check facts against the linked sources when
 editing, and keep new stories sourced the same way. The videos are planned topics until they are uploaded to YouTube.
+
+## Reader features
+
+- **Dark mode**: follows the device setting; the header toggle overrides it. Colours are tokens in `globals.css`
+  (`paper`, `ink`, `card`, `night`, …), redefined for dark mode in one place.
+- **Text size** (அ- / அ+), **read aloud** (browser speech, Tamil voice when the device has one, highlights the paragraph
+  being read) and **read later** (saved in the browser, listed at `/saved`) on every article.
+- **Install as an app**: `src/app/manifest.ts` makes the site installable from the browser menu on phones.
+- **Homepage numbers**: the "இந்த வாரம் எண்களில்" cards come from `src/data/numbers.ts`.
 
 ## Connecting the backend (Phase 2)
 
