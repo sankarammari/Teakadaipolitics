@@ -35,20 +35,33 @@ Branding, navigation and links live in `src/config/site.ts`. Environment variabl
 | Variable | Purpose |
 |---|---|
 | `NEXT_PUBLIC_SITE_URL` | Canonical URL for metadata, sitemap and Open Graph |
-| `NEXT_PUBLIC_SAMPLE_CONTENT` | `true` (default): show sample notices, withhold article structured data, block crawlers. Set `false` only after real content replaces the mocks. |
-| `NEXT_PUBLIC_SOCIAL_YOUTUBE` / `_INSTAGRAM` / `_X` | Official account URLs. Empty shows a "coming soon" state. |
+| `NEXT_PUBLIC_SAMPLE_CONTENT` | `true` shows a "sample content" notice on articles and videos. Off by default. |
+| `NEXT_PUBLIC_ALLOW_INDEXING` | `false` (default) blocks crawlers and withholds article structured data. Set `true` only on the live domain. |
+| `NEXT_PUBLIC_SOCIAL_FACEBOOK` / `_YOUTUBE` / `_INSTAGRAM` / `_X` | Override the official account URLs set in `src/config/site.ts`. |
 | `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT` | Optional external form service. Empty means the form validates but clearly says it can't send yet. |
 | `NEXT_PUBLIC_API_BASE_URL` | Reserved for the Phase 2 backend. Unused now. |
 
 Brand colours and fonts are tokens at the top of `src/app/globals.css` and in `src/app/layout.tsx`.
+
+## Visit counter
+
+The footer shows "Total Visitors". Every page view, including client-side navigation, calls
+`POST /api/visits` (`src/app/api/visits/route.ts`), which adds one and returns the new total; `GET` only reads it.
+On Netlify the total is stored in **Netlify Blobs** (store `site-stats`, key `visits`) and incremented with an etag
+compare-and-swap, so simultaneous visits are not lost. No setup is needed on Netlify. Anywhere Blobs isn't available
+(local `npm run dev`, other hosts) it falls back to an in-memory count that resets when the server restarts.
+Automated browsers (`navigator.webdriver`) are not counted.
 
 ## Motion
 
 Entrance and scroll effects use the same model as the DoctorProject site: elements carry
 `data-anim="fade|fadeUp|foldLeft|drop|wipe|line"` (use the `anim(kind, delay)` helper in `src/lib/anim.ts`),
 and an inline script (`src/lib/scroll-animations.ts`, added at the end of `<body>`) reveals them with an
-IntersectionObserver. The same script drives the sticky header state, reading progress bar and scroll
-scaling (`data-motion-scale`). Content is never hidden unless the script runs,
+IntersectionObserver. Reveals run in both scroll directions: an element that leaves the screen re-arms and animates
+again when it returns, from the side it re-enters (`data-anim-once` opts out). Put `data-anim-children="fadeUp"` on a
+container to stagger all its children without per-element markup. Photos inside `.group` cards zoom to 1.2x on hover
+with a light sheen; cards with `card-lift` rise slightly. The same script drives the sticky header state, reading
+progress bar and scroll scaling (`data-motion-scale`). Content is never hidden unless the script runs,
 new nodes are picked up automatically, and `prefers-reduced-motion` turns everything off. Keyframes and rules
 are under "Motion system" in `globals.css`.
 
@@ -88,9 +101,9 @@ scripts/                Placeholder image generator
 - **Articles** use typed `content` blocks (`paragraph`, `heading`, `list`, `quote`, `fact`, `statement`) instead of HTML.
   `fact` blocks render as "Reported fact" with an optional source; `statement` blocks render as "Attributed statement" with
   the speaker. Every article is labelled News, Analysis or Opinion, and analysis/opinion pages carry an explanatory note.
-- Only `status: "published"` articles are shown. `art-014` is a draft kept to prove that.
-- **Videos**: set `youtubeVideoId` to an 11-character id or any YouTube URL. Empty or invalid values show a
-  "not linked yet" fallback. The iframe loads only after the reader presses play (privacy-enhanced domain, no autoplay on load).
+- Only `status: "published"` articles are shown. Bylines are not displayed; every piece runs under the desk.
+- **Videos**: set `youtubeVideoId` to an 11-character id or any YouTube URL. Empty values show the video as
+  "coming soon" with a subscribe link to the channel. The iframe loads only after the reader presses play (privacy-enhanced domain, no autoplay on load).
 - **Images**: demo photos in `public/images/articles` and `public/images/videos` are from Wikimedia Commons under
   CC BY / CC BY-SA / public-domain licences. Their credits live in `src/data/image-credits.ts` and must stay visible
   (caption on article and video pages, plus `/credits`) for as long as the photos are used. They only illustrate the topic.
@@ -98,8 +111,9 @@ scripts/                Placeholder image generator
   credit entry. Broken images fall back to `public/images/fallback.svg`; `npm run placeholders` makes SVG covers for
   any mock slug without a photo.
 
-All current articles, authors and videos are fictional samples. Before launch, replace them with real, edited content and
-real contributor bios, then set `NEXT_PUBLIC_SAMPLE_CONTENT=false`.
+The articles in `src/data/articles.ts` are original Tamil summaries of Tamil Nadu political news from 11–23 October 2026,
+each linking the reports it is based on. Quotes are translated and attributed. Check facts against the linked sources when
+editing, and keep new stories sourced the same way. The videos are planned topics until they are uploaded to YouTube.
 
 ## Connecting the backend (Phase 2)
 

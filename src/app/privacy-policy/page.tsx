@@ -5,7 +5,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "தனியுரிமைக் கொள்கை (வரைவு)",
-  description: "டீக்கடை அரசியல் தளத்தின் வரைவுத் தனியுரிமைக் கொள்கை.",
+  description: "Teakadai Politics தளத்தின் வரைவுத் தனியுரிமைக் கொள்கை.",
   path: "/privacy-policy",
 });
 
@@ -16,7 +16,7 @@ export default function PrivacyPage() {
     <>
       <PageIntro title="தனியுரிமைக் கொள்கை" />
       <div className="container-page">
-        <div className="prose-body space-y-5">
+        <div data-anim-children="fadeUp" className="prose-body space-y-5">
           <DraftNotice>
             <strong>வரைவு; இன்னும் நடைமுறையில் இல்லை.</strong> தளம் இப்போது செயல்படும் விதத்தை விவரிக்கும் தற்காலிக
             உரை இது. வெளியீட்டுக்கு முன், இதழின் உண்மையான நடைமுறைகள், டிஜிட்டல் தனிநபர் தரவுப் பாதுகாப்புச் சட்டம்

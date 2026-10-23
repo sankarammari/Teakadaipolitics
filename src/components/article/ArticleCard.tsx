@@ -123,7 +123,7 @@ export function ArticleCard({
 
   if (variant === "row") {
     return (
-      <article className="group relative grid grid-cols-[7.5rem_1fr] gap-4 sm:grid-cols-[11rem_1fr]">
+      <article className="card-lift group relative grid grid-cols-[7.5rem_1fr] gap-4 sm:grid-cols-[11rem_1fr]">
         <CoverImage src={article.coverImage} alt={article.coverAlt} aspect="aspect-[4/3]" sizes="11rem" />
         <div>
           <Kicker article={article} />
@@ -149,7 +149,7 @@ export function ArticleCard({
   }
 
   return (
-    <article className="group relative flex flex-col gap-3">
+    <article className="card-lift group relative flex flex-col gap-3">
       <CoverImage src={article.coverImage} alt={article.coverAlt} />
       <Kicker article={article} categoryName={categoryName} />
       <Heading className="headline text-[1.35rem]">{titleLink}</Heading>

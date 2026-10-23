@@ -3,26 +3,31 @@
  * instead of inside components.
  */
 export const siteConfig = {
-  name: "டீக்கடை அரசியல்",
-  tagline: "ஒரு கிளாஸ் டீ, ஒரு அரசியல் விவாதம்.",
+  /** Brand name stays in English everywhere; the rest of the site is Tamil. */
+  name: "Teakadai Politics",
+  tagline: "டீ குடிப்போம்… கருத்தைப் பகிர்வோம்… மாற்றத்தை உருவாக்குவோம்!",
+  logo: "/logo/teakadai-politics-logo.jpg",
   description:
-    "நடப்பு நிகழ்வுகள், கொள்கைப் பகுப்பாய்வு, கருத்துக் கட்டுரைகள், அரசியல் வீடியோக்கள்: தமிழ்நாட்டு அரசியலை டீக்கடை பெஞ்சிலிருந்து பேசும் இணைய இதழ்.",
+    "நடப்பு நிகழ்வுகள், கொள்கைப் பகுப்பாய்வு, கருத்துக் கட்டுரைகள், அரசியல் வீடியோக்கள்: தமிழ்நாட்டு அரசியலை டீக்கடை பெஞ்சிலிருந்து பேசும் Teakadai Politics இணைய இதழ்.",
   url: (process.env.NEXT_PUBLIC_SITE_URL || "https://teakadaipolitics.com").replace(/\/$/, ""),
   locale: "ta_IN",
   contactEmail: "editor@teakadaipolitics.com",
 
-  /**
-   * While true, every article and video page shows a "sample content" notice,
-   * article structured data is withheld, and search engines are asked not to index.
-   * Set NEXT_PUBLIC_SAMPLE_CONTENT=false once real, edited content replaces the mock data.
-   */
-  sampleContent: process.env.NEXT_PUBLIC_SAMPLE_CONTENT !== "false",
+  /** Set NEXT_PUBLIC_SAMPLE_CONTENT=true to show "sample content" notices on articles and videos. */
+  sampleContent: process.env.NEXT_PUBLIC_SAMPLE_CONTENT === "true",
 
-  /** Leave a URL empty to show the "coming soon" state for that platform. */
+  /**
+   * Search engines are asked not to index the site, and article structured data
+   * is withheld, until NEXT_PUBLIC_ALLOW_INDEXING=true is set on the live domain.
+   */
+  allowIndexing: process.env.NEXT_PUBLIC_ALLOW_INDEXING === "true",
+
+  /** Official accounts. Env vars override; an empty URL shows a "coming soon" state. */
   social: {
-    youtube: process.env.NEXT_PUBLIC_SOCIAL_YOUTUBE || "",
-    instagram: process.env.NEXT_PUBLIC_SOCIAL_INSTAGRAM || "",
-    x: process.env.NEXT_PUBLIC_SOCIAL_X || "",
+    facebook: process.env.NEXT_PUBLIC_SOCIAL_FACEBOOK || "https://www.facebook.com/share/1CASFfsgmv/",
+    youtube: process.env.NEXT_PUBLIC_SOCIAL_YOUTUBE || "https://www.youtube.com/@teakadai_politics",
+    instagram: process.env.NEXT_PUBLIC_SOCIAL_INSTAGRAM || "https://www.instagram.com/teakadai_politics",
+    x: process.env.NEXT_PUBLIC_SOCIAL_X || "https://x.com/teakadaipoli",
   },
 
   /** Optional external form endpoint (e.g. Formspree). Empty means the form is not live. */

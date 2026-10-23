@@ -28,7 +28,7 @@ export default async function CategoryPage({ params }: Props) {
 
   return (
     <>
-      <div className="container-page pb-8 pt-10 md:pt-14">
+      <div data-anim-children="fadeUp" className="container-page pb-8 pt-10 md:pt-14">
         <h1 className="headline text-[2.1rem] md:text-[2.9rem]">{category.name}</h1>
         <p className="mt-3 max-w-2xl text-lg text-ink-soft">{category.description}</p>
         <nav aria-label="பிற பிரிவுகள்" className="mt-6">

@@ -98,7 +98,7 @@ export function ContactForm() {
         </p>
       )}
 
-      <form ref={formRef} onSubmit={onSubmit} noValidate className="grid gap-5">
+      <form ref={formRef} onSubmit={onSubmit} noValidate data-anim-children="fadeUp" className="grid gap-5">
         <div className="grid gap-5 sm:grid-cols-2">
           {(["name", "email"] as const).map((key) => (
             <div key={key}>

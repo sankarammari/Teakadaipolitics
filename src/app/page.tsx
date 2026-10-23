@@ -41,7 +41,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <h1 className="sr-only">டீக்கடை அரசியல்: தமிழ்நாட்டு அரசியல் செய்திகளும் பகுப்பாய்வும்</h1>
+      <h1 className="sr-only">Teakadai Politics: தமிழ்நாட்டு அரசியல் செய்திகளும் பகுப்பாய்வும்</h1>
 
       {/* Top story */}
       <section aria-labelledby="lead-heading" className="container-page pt-8 md:pt-10">
@@ -179,8 +179,8 @@ export default async function HomePage() {
           <div aria-hidden className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 select-none opacity-[0.06]">
             <div className="ticker-track [--ticker-duration:60s]">
               {[0, 1].map((k) => (
-                <span key={k} className="whitespace-nowrap pr-16 font-tamil text-[9rem] font-bold leading-none">
-                  டீக்கடை அரசியல் · டீக்கடை அரசியல் ·
+                <span key={k} className="whitespace-nowrap pr-16 font-brand text-[9rem] font-black uppercase leading-none [font-stretch:72%]">
+                  Teakadai Politics · Teakadai Politics ·
                 </span>
               ))}
             </div>
@@ -189,7 +189,7 @@ export default async function HomePage() {
             பெஞ்சில் வந்து உட்காருங்கள்
           </h2>
           <p {...anim("fadeUp", 250)} className="relative mt-2 max-w-xl text-paper/80">
-            புதிய வீடியோக்கள், சுருக்கமான கருத்துகள், ஒவ்வொரு புதிய கட்டுரைக்குமான இணைப்புகள்: டீக்கடை அரசியலைப் பின்தொடருங்கள்.
+            புதிய வீடியோக்கள், சுருக்கமான கருத்துகள், ஒவ்வொரு புதிய கட்டுரைக்குமான இணைப்புகள்: Teakadai Politics-ஐப் பின்தொடருங்கள்.
           </p>
           <div {...anim("fadeUp", 400)} className="relative mt-6">
             <SocialLinks variant="panel" />

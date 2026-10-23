@@ -1,10 +1,12 @@
 import { siteConfig, type SocialPlatform } from "@/config/site";
 import { SocialIcon } from "./SocialIcon";
 
-const platforms: { key: SocialPlatform; name: string; action: string }[] = [
-  { key: "youtube", name: "யூடியூப்", action: "யூடியூபில் பாருங்கள்" },
-  { key: "instagram", name: "இன்ஸ்டாகிராம்", action: "இன்ஸ்டாகிராமில் பின்தொடருங்கள்" },
-  { key: "x", name: "எக்ஸ் (ட்விட்டர்)", action: "எக்ஸ் தளத்தில் பின்தொடருங்கள்" },
+// `hover` fills the button with the platform colour (full class names so Tailwind keeps them)
+const platforms: { key: SocialPlatform; name: string; action: string; hover: string }[] = [
+  { key: "facebook", name: "Facebook", action: "ஃபேஸ்புக்கில் பின்தொடருங்கள்", hover: "hover:bg-[#1877f2] hover:border-[#1877f2]" },
+  { key: "youtube", name: "YouTube", action: "சப்ஸ்கிரைப் செய்யுங்கள்", hover: "hover:bg-[#ff0000] hover:border-[#ff0000]" },
+  { key: "instagram", name: "Instagram", action: "இன்ஸ்டாகிராமில் பின்தொடருங்கள்", hover: "hover:bg-[#d62976] hover:border-[#d62976]" },
+  { key: "x", name: "X (Twitter)", action: "எக்ஸ் தளத்தில் பின்தொடருங்கள்", hover: "hover:bg-black hover:border-black" },
 ];
 
 const isSafeUrl = (url: string) => {
@@ -27,7 +29,7 @@ export function SocialLinks({ variant = "row", tone = "light" }: SocialLinksProp
   if (variant === "row") {
     return (
       <ul className="flex items-center gap-2">
-        {platforms.map(({ key, name, action }) => {
+        {platforms.map(({ key, name, action, hover }) => {
           const url = siteConfig.social[key];
           const base = `grid size-10 place-items-center rounded-full border ${dark ? "border-white/25" : "border-rule"}`;
           return (
@@ -38,7 +40,7 @@ export function SocialLinks({ variant = "row", tone = "light" }: SocialLinksProp
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${action} (புதிய தாவலில் திறக்கும்)`}
-                  className={`${base} ${dark ? "text-paper hover:bg-white/10" : "text-ink hover:bg-white"}`}
+                  className={`${base} ${dark ? "text-paper" : "text-ink"} ${hover} transition-[background-color,border-color,color,transform] duration-200 hover:-translate-y-0.5 hover:text-white`}
                 >
                   <SocialIcon platform={key} />
                 </a>
@@ -60,8 +62,8 @@ export function SocialLinks({ variant = "row", tone = "light" }: SocialLinksProp
   }
 
   return (
-    <ul className="grid gap-3 sm:grid-cols-3">
-      {platforms.map(({ key, name, action }) => {
+    <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      {platforms.map(({ key, name, action, hover }) => {
         const url = siteConfig.social[key];
         const live = isSafeUrl(url);
         const inner = (
@@ -81,7 +83,7 @@ export function SocialLinks({ variant = "row", tone = "light" }: SocialLinksProp
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${cls} border-white/25 text-paper hover:bg-white/10`}
+                className={`${cls} border-white/25 text-paper transition-[background-color,border-color,transform] duration-200 hover:-translate-y-0.5 ${hover}`}
               >
                 {inner}
                 <span className="sr-only">(புதிய தாவலில் திறக்கும்)</span>

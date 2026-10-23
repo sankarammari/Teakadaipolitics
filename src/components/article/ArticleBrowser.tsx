@@ -66,6 +66,7 @@ export function ArticleBrowser({
       <div
         role="search"
         aria-label="கட்டுரைகளை வடிகட்டு"
+        data-anim-children="fadeUp"
         className="mb-8 grid gap-3 rounded-lg bg-paper-deep p-4 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr]"
       >
         <div className="sm:col-span-2 lg:col-span-1">

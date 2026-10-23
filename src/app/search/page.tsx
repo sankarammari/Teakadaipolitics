@@ -7,7 +7,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = {
   ...buildMetadata({
     title: "தேடல்",
-    description: "டீக்கடை அரசியல் கட்டுரைகளைத் தலைப்பு, பொருள், குறிச்சொல் மூலம் தேடுங்கள்.",
+    description: "Teakadai Politics கட்டுரைகளைத் தலைப்பு, பொருள், குறிச்சொல் மூலம் தேடுங்கள்.",
     path: "/search",
   }),
   robots: { index: false, follow: true },

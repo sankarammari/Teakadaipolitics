@@ -5,7 +5,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "எங்களைப் பற்றி",
-  description: "டீக்கடை அரசியல் ஏன் தொடங்கப்பட்டது; செய்தி, பகுப்பாய்வு, கருத்து ஆகியவற்றை எப்படிப் பிரித்துக் காட்டுகிறோம்.",
+  description: "Teakadai Politics ஏன் தொடங்கப்பட்டது; செய்தி, பகுப்பாய்வு, கருத்து ஆகியவற்றை எப்படிப் பிரித்துக் காட்டுகிறோம்.",
   path: "/about",
 });
 
@@ -14,14 +14,14 @@ const h2 = "headline pt-4 font-sans text-[1.6rem]";
 export default function AboutPage() {
   return (
     <>
-      <PageIntro title="டீக்கடை அரசியல் பற்றி" />
+      <PageIntro title="Teakadai Politics பற்றி" />
       <div className="container-page">
-        <div className="prose-body space-y-6">
+        <div data-anim-children="fadeUp" className="prose-body space-y-6">
           <p className="text-[1.2rem]">
             தமிழ்நாட்டில் அரசியல் எப்போதும் டீக்கடையில்தான் விவாதிக்கப்படுகிறது. ஒருவர் செய்தித்தாளை உரக்கப்
             படிப்பார், இன்னொருவர் மறுப்பார், இரண்டாவது கிளாஸ் டீ வருவதற்குள் பெஞ்சு முழுவதற்கும் ஒரு கருத்து
             உருவாகிவிடும். அந்த உரையாடலை, அதற்குத் தகுந்த செய்தியாக்கத்தோடும் சான்றுகளோடும், இணையத்துக்குக்
-            கொண்டுவருவதே டீக்கடை அரசியல்.
+            கொண்டுவருவதே Teakadai Politics.
           </p>
 
           <h2 className={h2}>நாங்கள் வெளியிடுவது</h2>

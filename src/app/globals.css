@@ -12,11 +12,14 @@
   --color-news: #1f4e8c;
   --color-analysis: #1c6247;
   --color-opinion: #8a2236;
+  /* Logo amber, for use on dark backgrounds only */
+  --color-amber: #f4a81d;
 
   --font-display: var(--font-anek-tamil), "Nirmala UI", "Latha", sans-serif;
   --font-sans: var(--font-anek-tamil), "Nirmala UI", "Latha", sans-serif;
   --font-serif: var(--font-serif-tamil), "Nirmala UI", "Latha", serif;
   --font-tamil: var(--font-anek-tamil), "Nirmala UI", sans-serif;
+  --font-brand: var(--font-brand-latin), "Arial Narrow", sans-serif;
 }
 
 @layer base {
@@ -112,6 +115,10 @@
   from { clip-path: inset(0 100% 0 0); }
   to { clip-path: inset(0 0 0 0); }
 }
+@keyframes tp-wipe-rev {
+  from { clip-path: inset(0 0 0 100%); }
+  to { clip-path: inset(0 0 0 0); }
+}
 @keyframes tp-kenburns {
   from { transform: scale(1.14); }
   to { transform: scale(1); }
@@ -138,6 +145,8 @@
    counts the target's own clip-path, so a clipped frame would never start */
 [data-anim="wipe"] { --anim-name: none; }
 [data-anim="line"] { --anim-name: none; }
+/* Scrolling up: elements re-enter from above, so they drop in instead of rising */
+[data-anim-from="top"] { --anim-distance: -28px; }
 
 @media (prefers-reduced-motion: no-preference) {
   html[data-anim-on] [data-anim]:not([data-anim-state="done"]) { opacity: 0; }
@@ -156,6 +165,13 @@
   }
   [data-anim="wipe"][data-anim-state="in"] > * {
     animation: tp-wipe var(--anim-duration, 1100ms) cubic-bezier(0.77, 0, 0.175, 1) var(--anim-delay, 0ms) both;
+  }
+  [data-anim="wipe"][data-anim-from="top"][data-anim-state="in"] > * {
+    animation-name: tp-wipe-rev;
+  }
+  html[data-anim-on] [data-anim="foldLeft"][data-anim-from="top"]:not([data-anim-state="done"]) {
+    transform: perspective(2000px) rotateX(-18deg);
+    transform-origin: top;
   }
   /* The photo inside a wipe settles from a slow zoom (Ken Burns) */
   [data-anim="wipe"]:is([data-anim-state="in"], [data-anim-state="done"]) img {
@@ -221,6 +237,38 @@ html[data-scrolled] .nav-mark {
 }
 .live-dot {
   animation: tp-pulse 1.6s ease-out infinite;
+}
+
+/* ------------------------------------------------------------
+   Photo hover effects (.img-fx frames, inside a .group card):
+   the photo zooms to 1.2x (CoverImage hoverZoom) while a light
+   sheen (::after) sweeps across once
+   ------------------------------------------------------------ */
+.img-fx::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 35%, rgb(255 255 255 / 0.35) 50%, transparent 65%);
+  transform: translateX(-120%);
+}
+.img-fx img {
+  transition: transform 700ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.group:hover .img-fx::after,
+.group:focus-within .img-fx::after {
+  transform: translateX(120%);
+  transition: transform 900ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Cards lift slightly on hover */
+.card-lift {
+  transition: transform 350ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.card-lift:hover,
+.card-lift:focus-within {
+  transform: translateY(-4px);
 }
 
 /* Video play button ring on hover */

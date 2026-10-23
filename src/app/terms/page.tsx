@@ -4,7 +4,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "விதிமுறைகள் (வரைவு)",
-  description: "டீக்கடை அரசியல் தளத்தின் வரைவுப் பயன்பாட்டு விதிமுறைகள்.",
+  description: "Teakadai Politics தளத்தின் வரைவுப் பயன்பாட்டு விதிமுறைகள்.",
   path: "/terms",
 });
 
@@ -15,7 +15,7 @@ export default function TermsPage() {
     <>
       <PageIntro title="பயன்பாட்டு விதிமுறைகள்" />
       <div className="container-page">
-        <div className="prose-body space-y-5">
+        <div data-anim-children="fadeUp" className="prose-body space-y-5">
           <DraftNotice>
             <strong>வரைவு; இன்னும் நடைமுறையில் இல்லை.</strong> இவை தற்காலிக விதிமுறைகள். வெளியீட்டுக்கு முன், இதழுக்கு
             ஆலோசனை வழங்கத் தகுதியுள்ள ஒருவர் இவற்றைச் சரிபார்க்க வேண்டும்.

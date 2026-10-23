@@ -4,6 +4,8 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { BrandMark } from "@/components/common/BrandMark";
+import { SocialLinks } from "@/components/common/SocialLinks";
 import { HeaderSearch } from "./HeaderSearch";
 import { isActive } from "./NavLinks";
 
@@ -76,7 +78,8 @@ export function MobileNav({ items }: { items: readonly NavItem[] }) {
           aria-label="மெனு"
           className="fixed inset-0 z-40 overflow-y-auto bg-paper"
         >
-          <div className="container-page flex justify-end pt-5">
+          <div className="container-page flex items-center justify-between pt-5">
+            <BrandMark size="sm" />
             <button
               type="button"
               onClick={() => {
@@ -104,6 +107,9 @@ export function MobileNav({ items }: { items: readonly NavItem[] }) {
                 </li>
               ))}
             </ul>
+            <div className="mt-6">
+              <SocialLinks />
+            </div>
             <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm text-ink-soft">
               <li><Link href="/about" className="link-quiet">எங்களைப் பற்றி</Link></li>
               <li><Link href="/contact" className="link-quiet">தொடர்புக்கு</Link></li>

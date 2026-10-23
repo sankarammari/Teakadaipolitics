@@ -6,7 +6,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "தொடர்புக்கு",
-  description: "செய்திக் குறிப்புகள், திருத்தங்கள், கருத்துகளை டீக்கடை அரசியல் ஆசிரியர் குழுவுக்கு அனுப்புங்கள்.",
+  description: "செய்திக் குறிப்புகள், திருத்தங்கள், கருத்துகளை Teakadai Politics ஆசிரியர் குழுவுக்கு அனுப்புங்கள்.",
   path: "/contact",
 });
 
@@ -19,7 +19,7 @@ export default function ContactPage() {
       />
       <div className="container-page grid gap-12 lg:grid-cols-[minmax(0,2fr)_1fr]">
         <ContactForm />
-        <aside className="space-y-8 lg:border-l lg:border-rule lg:pl-10">
+        <aside data-anim-children="fadeUp" className="space-y-8 lg:border-l lg:border-rule lg:pl-10">
           <div>
             <h2 className="headline text-2xl">மின்னஞ்சல்</h2>
             <a href={`mailto:${siteConfig.contactEmail}`} className="mt-1 inline-block font-semibold text-tea underline underline-offset-2">

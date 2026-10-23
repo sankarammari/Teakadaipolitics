@@ -65,7 +65,11 @@ export default async function VideoPage({ params }: Props) {
           <h1 className="headline text-[1.9rem] sm:text-[2.5rem]">{video.title}</h1>
           <p className="mt-3 flex flex-wrap gap-x-4 text-sm text-ink-soft">
             <span className="font-semibold text-ink">{video.channelName}</span>
-            <time dateTime={video.publishedAt}>{formatDate(video.publishedAt)}</time>
+            {watchUrl ? (
+              <time dateTime={video.publishedAt}>{formatDate(video.publishedAt)}</time>
+            ) : (
+              <span className="font-semibold text-tea">யூடியூபில் விரைவில்</span>
+            )}
             {video.durationLabel && <span>{video.durationLabel}</span>}
           </p>
           <p className="mt-5 font-serif text-lg leading-relaxed">{video.description}</p>

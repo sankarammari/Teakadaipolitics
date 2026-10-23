@@ -1,8 +1,10 @@
 "use client";
 
-import { Play, VideoOff } from "lucide-react";
+import { BellRing, Play } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+import { SocialIcon } from "@/components/common/SocialIcon";
+import { siteConfig } from "@/config/site";
 import { getYouTubeEmbedUrl, getYouTubeWatchUrl } from "@/lib/youtube";
 
 interface YouTubePlayerProps {
@@ -14,7 +16,8 @@ interface YouTubePlayerProps {
 /**
  * Click-to-load player: shows the local thumbnail first and only inserts the
  * YouTube iframe when the reader presses play, so no YouTube requests or
- * autoplay happen on page load. Invalid or missing ids show a fallback.
+ * autoplay happen on page load. Videos without an id yet show a "coming soon"
+ * panel that points to the channel.
  */
 export function YouTubePlayer({ videoId, title, thumbnail }: YouTubePlayerProps) {
   const [active, setActive] = useState(false);
@@ -31,9 +34,21 @@ export function YouTubePlayer({ videoId, title, thumbnail }: YouTubePlayerProps)
         <div className="opacity-40">{poster}</div>
         <div className="absolute inset-0 grid place-items-center p-6 text-center text-paper">
           <div>
-            <VideoOff className="mx-auto size-8" aria-hidden />
-            <p className="headline mt-2 text-2xl">இந்த வீடியோ இன்னும் இணைக்கப்படவில்லை</p>
-            <p className="mt-1 text-sm text-paper/80">இயக்க, வீடியோ தரவில் அதன் யூடியூப் இணைப்பைச் சேர்க்கவும்.</p>
+            <BellRing className="mx-auto size-8 text-amber" aria-hidden />
+            <p className="headline mt-2 text-2xl">இந்த வீடியோ விரைவில் வெளியாகும்</p>
+            <p className="mt-1 text-sm text-paper/80">புதிய வீடியோக்கள் வந்தவுடன் தெரிந்துகொள்ள சேனலை சப்ஸ்கிரைப் செய்யுங்கள்.</p>
+            {siteConfig.social.youtube && (
+              <a
+                href={siteConfig.social.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center gap-2 rounded-full bg-[#ff0000] px-5 py-2 text-sm font-bold text-white transition-transform hover:scale-105"
+              >
+                <SocialIcon platform="youtube" className="size-4" />
+                சப்ஸ்கிரைப் செய்யுங்கள்
+                <span className="sr-only">(புதிய தாவலில் திறக்கும்)</span>
+              </a>
+            )}
           </div>
         </div>
       </div>

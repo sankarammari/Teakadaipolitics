@@ -81,7 +81,7 @@ export function SearchView({ articles, categories }: { articles: Article[]; cate
             action={{ label: "எல்லாக் கட்டுரைகளும்", href: "/articles" }}
           />
         ) : (
-          <ul className="max-w-3xl divide-y divide-rule">
+          <ul data-anim-children="fadeUp" className="max-w-3xl divide-y divide-rule">
             {results.map((a) => (
               <li key={a.id} className="py-5 first:pt-0">
                 <ArticleCard article={a} variant="row" categoryName={names.get(a.category)} headingLevel="h2" />

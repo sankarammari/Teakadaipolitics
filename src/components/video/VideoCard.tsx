@@ -2,6 +2,7 @@ import { Play } from "lucide-react";
 import Link from "next/link";
 import { CoverImage } from "@/components/common/CoverImage";
 import { formatDate } from "@/lib/format";
+import { parseYouTubeId } from "@/lib/youtube";
 import type { Video } from "@/types";
 
 interface VideoCardProps {
@@ -13,8 +14,10 @@ interface VideoCardProps {
 
 export function VideoCard({ video, categoryName, headingLevel: Heading = "h3", size = "standard" }: VideoCardProps) {
   const large = size === "large";
+  // Not on YouTube yet: shown as an upcoming video
+  const upcoming = !parseYouTubeId(video.youtubeVideoId);
   return (
-    <article className="group relative flex flex-col gap-3">
+    <article className="card-lift group relative flex flex-col gap-3">
       <div className="relative">
         <CoverImage
           src={video.thumbnail}
@@ -31,10 +34,17 @@ export function VideoCard({ video, categoryName, headingLevel: Heading = "h3", s
           <span className="play-ring absolute inset-0 rounded-full border-2 border-paper" />
           <Play className={large ? "size-6 translate-x-0.5" : "size-4 translate-x-px"} fill="currentColor" />
         </span>
-        {video.durationLabel && (
-          <span className="absolute bottom-3 right-3 rounded bg-ink/85 px-2 py-0.5 text-xs font-semibold text-paper">
-            {video.durationLabel}
+        {upcoming ? (
+          <span className="absolute right-3 top-3 flex items-center gap-1.5 rounded-full bg-amber px-2.5 py-0.5 text-xs font-bold text-ink">
+            <span aria-hidden className="size-1.5 animate-pulse rounded-full bg-ink" />
+            விரைவில்
           </span>
+        ) : (
+          video.durationLabel && (
+            <span className="absolute bottom-3 right-3 rounded bg-ink/85 px-2 py-0.5 text-xs font-semibold text-paper">
+              {video.durationLabel}
+            </span>
+          )
         )}
       </div>
       {categoryName && <p className="text-sm font-semibold text-tea">{categoryName}</p>}
@@ -49,7 +59,7 @@ export function VideoCard({ video, categoryName, headingLevel: Heading = "h3", s
       {large && <p className="max-w-xl text-ink-soft">{video.description}</p>}
       <p className="flex flex-wrap gap-x-3 text-sm text-ink-soft">
         <span>{video.channelName}</span>
-        <time dateTime={video.publishedAt}>{formatDate(video.publishedAt)}</time>
+        {upcoming ? <span>யூடியூபில் விரைவில்</span> : <time dateTime={video.publishedAt}>{formatDate(video.publishedAt)}</time>}
       </p>
     </article>
   );

@@ -8,7 +8,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "வீடியோ",
-  description: "டீக்கடை அரசியல் யூடியூப் சேனலின் அரசியல் விவாதங்கள், விளக்கங்கள், உரையாடல்கள்.",
+  description: "Teakadai Politics யூடியூப் சேனலின் அரசியல் விவாதங்கள், விளக்கங்கள், உரையாடல்கள்.",
   path: "/videos",
 });
 

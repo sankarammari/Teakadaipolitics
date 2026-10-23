@@ -103,7 +103,7 @@ export default async function ArticlePage({ params }: Props) {
         </div>
       </header>
 
-      <figure className="container-page mt-8">
+      <figure className="group container-page mt-8">
         {/* Grows from 94% to full width as it reaches mid-screen */}
         <div data-motion-scale="94" suppressHydrationWarning className="origin-top">
           <CoverImage

@@ -1,8 +1,10 @@
 import Link from "next/link";
+import { BrandMark } from "@/components/common/BrandMark";
 import { SocialLinks } from "@/components/common/SocialLinks";
 import { siteConfig } from "@/config/site";
 import { categories } from "@/data/categories";
 import { anim } from "@/lib/anim";
+import { VisitCounter } from "./VisitCounter";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -10,8 +12,10 @@ export function Footer() {
     <footer className="mt-20 bg-ink text-paper">
       <div className="container-page grid gap-10 py-12 md:grid-cols-[1.3fr_1fr_1fr]">
         <div {...anim("fadeUp")}>
-          <p className="font-tamil text-2xl font-bold text-tea-light">{siteConfig.name}</p>
-          <p className="mt-2 max-w-xs text-sm text-paper/75">{siteConfig.tagline}</p>
+          <Link href="/" aria-label={`${siteConfig.name}, முகப்புப் பக்கம்`} className="inline-block">
+            <BrandMark size="md" tone="dark" />
+          </Link>
+          <p className="mt-4 max-w-xs text-sm text-paper/75">{siteConfig.tagline}</p>
           <div className="mt-5">
             <SocialLinks tone="dark" />
           </div>
@@ -44,10 +48,13 @@ export function Footer() {
         </nav>
       </div>
       <div className="border-t border-white/15">
-        <p className="container-page py-5 text-sm text-paper/60">
-          © {year} {siteConfig.name}.{" "}
-          {siteConfig.sampleContent && "இந்தத் தளத்தில் தற்போது உள்ள கட்டுரைகளும் வீடியோக்களும் மாதிரி உள்ளடக்கம் மட்டுமே."}
-        </p>
+        <div className="container-page flex flex-wrap items-center justify-between gap-x-6 gap-y-3 py-5 pr-20 xl:pr-6">
+          <p className="text-sm text-paper/60">
+            © {year} {siteConfig.name}.{" "}
+            {siteConfig.sampleContent && "இந்தத் தளத்தில் தற்போது உள்ள கட்டுரைகளும் வீடியோக்களும் மாதிரி உள்ளடக்கம் மட்டுமே."}
+          </p>
+          <VisitCounter />
+        </div>
       </div>
     </footer>
   );

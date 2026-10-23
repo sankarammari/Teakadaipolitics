@@ -11,7 +11,7 @@ interface CoverImageProps {
   sizes?: string;
   priority?: boolean;
   className?: string;
-  /** Ease the photo in slightly when the surrounding `.group` card is hovered. */
+  /** Zoom the photo to 1.2x when the surrounding `.group` card is hovered. */
   hoverZoom?: boolean;
   /** Extra props for the frame, e.g. anim("wipe") */
   frameProps?: Record<string, unknown>;
@@ -19,7 +19,10 @@ interface CoverImageProps {
 
 const FALLBACK = "/images/fallback.svg";
 
-/** Fixed-ratio image that swaps to a neutral placeholder if the source fails. */
+/**
+ * Fixed-ratio image that swaps to a neutral placeholder if the source fails.
+ * Inside a `.group` card it gets the hover effects from `.img-fx` in globals.css.
+ */
 export function CoverImage({
   src,
   alt,
@@ -33,7 +36,7 @@ export function CoverImage({
   const [current, setCurrent] = useState(src || FALLBACK);
 
   return (
-    <div {...frameProps} className={`relative overflow-hidden rounded-md bg-paper-deep ${aspect} ${className}`}>
+    <div {...frameProps} className={`img-fx relative isolate overflow-hidden rounded-md bg-paper-deep ${aspect} ${className}`}>
       {/* Inner layer: a wipe animates this layer while the photo itself settles from its zoom */}
       <div className="absolute inset-0">
         <Image
@@ -47,7 +50,7 @@ export function CoverImage({
           unoptimized={current.endsWith(".svg")}
           // Bias the crop upwards so towers and rooflines aren't cut off
           className={`object-cover object-[50%_30%] ${
-            hoverZoom ? "transition-transform duration-700 ease-out group-hover:scale-[1.04]" : ""
+            hoverZoom ? "group-hover:scale-[1.2] group-focus-within:scale-[1.2]" : ""
           }`}
           onError={() => current !== FALLBACK && setCurrent(FALLBACK)}
         />

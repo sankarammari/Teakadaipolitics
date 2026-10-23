@@ -1,31 +1,33 @@
 import type { ImageCredit } from "@/types";
 
 /*
- * Demo photos from Wikimedia Commons. CC BY / CC BY-SA licences require the
+ * Photos from Wikimedia Commons, used to illustrate each story's topic. CC BY / CC BY-SA licences require the
  * credit shown on the page and on /credits. Replace with the publication's
  * own photos (and their credits) before launch.
  */
 export const imageCredits: Record<string, ImageCredit> = {
-  "/images/articles/ward-budgets-what-the-money-really-buys.jpg": { author: "Yercaud-elango", license: "CC BY 4.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:Ripon_Building-1-central-chennai-India.jpg" },
-  "/images/articles/reading-turnout-numbers-without-overreading-them.jpg": { author: "Al Jazeera English", license: "CC BY-SA 2.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:Queues_of_Indian_voters_-_Flickr_-_Al_Jazeera_English.jpg" },
-  "/images/articles/assembly-session-what-passed-and-what-waited.jpg": { author: "L. Vivian Richard", license: "Public domain", sourceUrl: "https://commons.wikimedia.org/wiki/File:Fort_St._George,_Chennai_2.jpg" },
-  "/images/articles/free-bus-travel-scheme-who-uses-it.jpg": { author: "Aravind Sivaraj", license: "CC BY-SA 3.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:Chennai_MTC%27s_ordinary_fare_bus.jpg" },
-  "/images/articles/why-alliance-arithmetic-rarely-adds-up.jpg": { author: "Shagil Kannur", license: "CC BY-SA 4.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:Contr_Unit_of_Electronic_Voting_Machine_2.jpg" },
-  "/images/articles/district-collectors-office-pending-petitions.jpg": { author: "Thamizhpparithi Maari", license: "CC BY-SA 4.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:Collectorate,_Thanjavur.jpg" },
-  "/images/articles/state-budget-explained-in-five-numbers.jpg": { author: "Rajgovind Jawahar", license: "CC BY 3.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:Moore_Market_Complex_Chennai_(119379983).jpeg" },
-  "/images/articles/panchayat-elections-reservation-rotation.jpg": { author: "Palanis1", license: "CC BY-SA 4.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:Kovilambakkam_panchayat_office.jpg" },
-  "/images/articles/fuel-prices-and-the-tea-glass-index.jpg": { author: "Karthickbala", license: "CC BY-SA 3.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:Tea_stall_tamil_nadu.jpg" },
-  "/images/articles/school-breakfast-scheme-first-year-review.jpg": { author: "Matthew T Rader", license: "CC BY-SA 4.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:Children_in_an_elementary_school_in_Mayiladuthurai.jpg" },
-  "/images/articles/booth-agents-the-campaigns-quiet-backbone.jpg": { author: "Ranjit Bhaskar / Al Jazeera English", license: "CC BY-SA 2.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:Rural_polling_station_in_Bangalore,_2009.jpg" },
-  "/images/articles/metro-rail-phase-two-land-acquisition.jpg": { author: "Arjun1001", license: "CC BY-SA 4.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:Alstom_Metropolis_train-set_at_Guindy_Metro_station_in_Chennai.jpg" },
-  "/images/articles/why-manifestos-deserve-a-second-reading.jpg": { author: "Arunankapilan", license: "CC BY-SA 3.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:%E0%AE%A8%E0%AE%BE%E0%AE%B3%E0%AE%BF%E0%AE%A4%E0%AE%B4%E0%AF%8D_%E0%AE%B5%E0%AE%BE%E0%AE%9A%E0%AE%BF%E0%AE%AA%E0%AF%8D%E0%AE%AA%E0%AF%81.JPG" },
-  "/images/articles/draft-article-not-published.jpg": { author: "PlaneMad", license: "CC BY-SA 2.5", sourceUrl: "https://commons.wikimedia.org/wiki/File:Ripon_Building_panorama.jpg" },
-  "/images/videos/bench-talk-what-the-assembly-session-left-unfinished.jpg": { author: "L. Vivian Richard", license: "Public domain", sourceUrl: "https://commons.wikimedia.org/wiki/File:Fort_St._George,_Chennai_3.jpg" },
-  "/images/videos/turnout-explained-in-ten-minutes.jpg": { author: "McKay Savage", license: "CC BY 2.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:India_-_Chennai_-_busy_T._Nagar_market_2_(3059483658).jpg" },
-  "/images/videos/reading-a-ward-budget-together.jpg": { author: "PlaneMad", license: "CC BY 2.5", sourceUrl: "https://commons.wikimedia.org/wiki/File:Ripon_Building_panorama_2.jpg" },
-  "/images/videos/free-bus-travel-riders-speak.jpg": { author: "PlaneMad", license: "CC BY-SA 2.5", sourceUrl: "https://commons.wikimedia.org/wiki/File:MTC_bus_old.jpg" },
-  "/images/videos/state-budget-five-numbers-whiteboard.jpg": { author: "Hiroki Ogawa", license: "CC BY 3.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:Fort_St._George_George_Town_Chennai_India_-_panoramio_(1).jpg" },
-  "/images/videos/a-day-with-a-booth-agent.jpg": { author: "Thamizhpparithi Maari", license: "CC BY-SA 4.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:Building_of_Village_Panchayat_Service_Centre.jpg" },
+  "/images/articles/chennai-metro-poonamallee-vadapalani-stretch-opens.jpg": { author: "Arjun1001", license: "CC BY-SA 4.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:Alstom_Metropolis_train-set_at_Guindy_Metro_station_in_Chennai.jpg" },
+  "/images/articles/dmk-demands-cec-removal-in-sir-row.jpg": { author: "Al Jazeera English", license: "CC BY-SA 2.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:Queues_of_Indian_voters_-_Flickr_-_Al_Jazeera_English.jpg" },
+  "/images/articles/tvk-joins-india-bloc-anti-sir-protest.jpg": { author: "Shagil Kannur", license: "CC BY-SA 4.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:Contr_Unit_of_Electronic_Voting_Machine_2.jpg" },
+  "/images/articles/dharapuram-ntk-candidate-karthika-arrested.jpg": { author: "Ranjit Bhaskar / Al Jazeera English", license: "CC BY-SA 2.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:Rural_polling_station_in_Bangalore,_2009.jpg" },
+  "/images/articles/tamil-nadu-semiconductor-ecosystem-scheme-2026.jpg": { author: "L. Vivian Richard", license: "Public domain", sourceUrl: "https://commons.wikimedia.org/wiki/File:Fort_St._George,_Chennai_2.jpg" },
+  "/images/articles/rural-employment-additional-25-days.jpg": { author: "Thamizhpparithi Maari", license: "CC BY-SA 4.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:Building_of_Village_Panchayat_Service_Centre.jpg" },
+  "/images/articles/madras-hc-upholds-resignations-of-six-aiadmk-mlas.jpg": { author: "Suresh Babunair", license: "CC BY 3.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:Madras_high_court,_chennai_-_panoramio.jpg" },
+  "/images/articles/anti-defection-law-resignations-explained.jpg": { author: "Raki_Man", license: "CC BY 3.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:Madras_High_Court_-_panoramio.jpg" },
+  "/images/articles/tamil-nadu-power-purchase-rs-37-per-unit-row.jpg": { author: "Prateek Rungta", license: "CC BY 2.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:North_Chennai_thermal_power_station.jpg" },
+  "/images/articles/vijay-naidu-telugu-ganga-water-for-chennai.jpg": { author: "Saral Shots", license: "CC0", sourceUrl: "https://commons.wikimedia.org/wiki/File:Poondi_Reservoir.jpg" },
+  "/images/articles/fine-rice-prices-push-tamil-nadu-inflation.jpg": { author: "Thamizhpparithi Maari", license: "CC BY-SA 3.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:%22A_paddy_field_in_Tamil_Nadu%22.jpg" },
+  "/images/articles/l-murugan-quits-union-ministry.jpg": { author: "Pinakpani", license: "CC BY-SA 4.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:Parliament_of_India_in_New_Delhi_06.jpg" },
+  "/images/articles/chennai-heavy-rain-cm-vijay-reviews-monsoon-preparations.jpg": { author: "McKay Savage", license: "CC BY 2.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:India_-_Chennai_-_Monsoon_-_01_(3058208937).jpg" },
+  "/images/articles/drug-seizures-surge-opposition-targets-government.jpg": { author: "Ssriram mt", license: "CC BY-SA 4.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:Nagapattinam1.JPG" },
+  "/images/articles/kodaikanal-online-tickets-for-tourist-spots.jpg": { author: "Manimavet", license: "CC BY-SA 4.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:Pillar_Rocks_Kodaikanal.jpg" },
+  "/images/articles/asset-declaration-mandatory-for-promotion.jpg": { author: "L. Vivian Richard", license: "Public domain", sourceUrl: "https://commons.wikimedia.org/wiki/File:Fort_St._George,_Chennai_3.jpg" },
+  "/images/articles/chennai-electric-bus-tender-cancelled-then-revived.jpg": { author: "Aravind Sivaraj", license: "CC BY-SA 3.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:Chennai_MTC%27s_ordinary_fare_bus.jpg" },
+  "/images/articles/chennai-civic-tenders-cancelled-mayor-priya.jpg": { author: "PlaneMad", license: "CC BY 2.5", sourceUrl: "https://commons.wikimedia.org/wiki/File:Ripon_Building_panorama_2.jpg" },
+  "/images/videos/power-purchase-explained.jpg": { author: "Prateek Rungta", license: "CC BY 2.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:North_Chennai_thermal_power_station.jpg" },
+  "/images/videos/sir-voter-roll-row-explained.jpg": { author: "McKay Savage", license: "CC BY 2.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:India_-_Chennai_-_busy_T._Nagar_market_2_(3059483658).jpg" },
+  "/images/videos/chennai-rain-drainage-readiness.jpg": { author: "PlaneMad", license: "CC BY 2.5", sourceUrl: "https://commons.wikimedia.org/wiki/File:Ripon_Building_panorama_2.jpg" },
+  "/images/videos/teakadai-bench-weekly-roundup.jpg": { author: "Karthickbala", license: "CC BY-SA 3.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:Tea_stall_tamil_nadu.jpg" },
 };
 
 const licenseUrls: Record<string, string> = {

@@ -18,26 +18,36 @@ export const SCROLL_ANIMATION_SCRIPT = `(function(){
   var root = document.documentElement;
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!reduce) root.setAttribute('data-anim-on', '');
+  // Reveals run in both scroll directions: an element that fully leaves the
+  // screen is re-armed ("wait") and animates again when it comes back, from
+  // the side it re-enters (data-anim-from="top" when scrolling up).
+  // [data-anim-once] elements only animate the first time.
   var io = !reduce && 'IntersectionObserver' in window
     ? new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (!e.isIntersecting) return;
-          io.unobserve(e.target);
           var el = e.target;
-          el.setAttribute('data-anim-state', 'in');
-          // Failsafe: finish even if animationend never arrives
-          setTimeout(function () {
-            if (el.getAttribute('data-anim-state') === 'in') el.setAttribute('data-anim-state', 'done');
-          }, 4000);
+          var state = el.getAttribute('data-anim-state');
+          if (e.isIntersecting && e.intersectionRatio >= 0.12) {
+            if (state !== 'wait') return;
+            el.setAttribute('data-anim-from', e.boundingClientRect.top < 0 ? 'top' : 'bottom');
+            el.setAttribute('data-anim-state', 'in');
+            if (el.hasAttribute('data-anim-once')) io.unobserve(el);
+            // Failsafe: finish even if animationend never arrives
+            setTimeout(function () {
+              if (el.getAttribute('data-anim-state') === 'in') el.setAttribute('data-anim-state', 'done');
+            }, 4000);
+          } else if (!e.isIntersecting && state !== 'wait') {
+            el.setAttribute('data-anim-state', 'wait');
+          }
         });
-      }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' })
+      }, { threshold: [0, 0.12] })
     : null;
 
   document.addEventListener('animationend', function (e) {
     var el = e.target;
     if (!el.getAttribute || e.animationName === 'tp-kenburns') return;
     // A wipe animates its children, so finish the frame around them
-    if (e.animationName === 'tp-wipe') el = el.parentElement;
+    if (e.animationName === 'tp-wipe' || e.animationName === 'tp-wipe-rev') el = el.parentElement;
     if (el && el.getAttribute('data-anim-state') === 'in') el.setAttribute('data-anim-state', 'done');
   }, true);
 
@@ -88,12 +98,40 @@ export const SCROLL_ANIMATION_SCRIPT = `(function(){
   };
   window.__tpAnimScan();
 
+  // [data-anim-children="fadeUp"] staggers every direct child, so prose and
+  // list pages need no per-element markup. Runs only after React hydrates
+  // (ScrollAnimations.tsx sets __tpHydrated), because tagging server HTML
+  // before hydration would make React report attribute mismatches.
+  window.__tpTagChildren = function () {
+    document.querySelectorAll('[data-anim-children]').forEach(function (parent) {
+      var kind = parent.getAttribute('data-anim-children') || 'fadeUp';
+      var firstPass = !parent.__tpSeen;
+      parent.__tpSeen = true;
+      Array.prototype.forEach.call(parent.children, function (el, i) {
+        if (el.hasAttribute('data-anim')) return;
+        el.setAttribute('data-anim', kind);
+        el.style.setProperty('--anim-delay', (i % 4) * 90 + 'ms');
+        var r = el.getBoundingClientRect();
+        // Already on screen at page load: leave it visible; it animates whenever
+        // it re-enters. Children added later (search results, errors) animate in.
+        if (firstPass && r.top < window.innerHeight && r.bottom > 0) {
+          el.setAttribute('data-anim-state', 'done');
+          if (io) io.observe(el);
+        }
+      });
+    });
+  };
+
   var queued = false;
   if ('MutationObserver' in window) {
     new MutationObserver(function () {
       if (queued) return;
       queued = true;
-      requestAnimationFrame(function () { queued = false; window.__tpAnimScan(); });
+      requestAnimationFrame(function () {
+        queued = false;
+        if (window.__tpHydrated) window.__tpTagChildren();
+        window.__tpAnimScan();
+      });
     }).observe(document.body, { childList: true, subtree: true });
   }
   // Failsafe: never leave content hidden
@@ -107,5 +145,7 @@ export const SCROLL_ANIMATION_SCRIPT = `(function(){
 declare global {
   interface Window {
     __tpAnimScan?: () => void;
+    __tpTagChildren?: () => void;
+    __tpHydrated?: boolean;
   }
 }

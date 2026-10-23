@@ -58,11 +58,11 @@ export function buildMetadata({
 }
 
 /**
- * NewsArticle / OpinionNewsArticle structured data. Returns null while the
- * site shows sample content so invented articles are never marked up as news.
+ * NewsArticle / OpinionNewsArticle structured data. Returns null until
+ * indexing is switched on, so a preview deployment is never marked up as news.
  */
 export function articleJsonLd(article: Article) {
-  if (siteConfig.sampleContent) return null;
+  if (!siteConfig.allowIndexing) return null;
   return {
     "@context": "https://schema.org",
     "@type": article.contentType === "opinion" ? "OpinionNewsArticle" : article.contentType === "analysis" ? "AnalysisNewsArticle" : "NewsArticle",

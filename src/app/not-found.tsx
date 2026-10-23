@@ -5,7 +5,7 @@ export const metadata = { title: "பக்கம் கிடைக்கவி
 
 export default function NotFound() {
   return (
-    <div className="container-page py-20 md:py-28">
+    <div data-anim-children="fadeUp" className="container-page py-20 md:py-28">
       <p className="text-lg font-bold text-tea">404</p>
       <h1 className="headline mt-2 text-[2.3rem] md:text-[3.2rem]">இந்தப் பக்கம் இங்கே இல்லை</h1>
       <p className="mt-3 max-w-xl text-lg text-ink-soft">

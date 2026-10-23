@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Anek_Tamil, Noto_Serif_Tamil } from "next/font/google";
+import { Anek_Tamil, Archivo, Noto_Serif_Tamil } from "next/font/google";
 import { ArrowUp } from "lucide-react";
 import { ScrollAnimations } from "@/components/common/ScrollAnimations";
 import { Footer } from "@/components/layout/Footer";
@@ -12,6 +12,14 @@ const anekTamil = Anek_Tamil({
   subsets: ["tamil", "latin"],
   axes: ["wdth"],
   variable: "--font-anek-tamil",
+  display: "swap",
+});
+
+// English brand wordmark ("Teakadai Politics")
+const archivo = Archivo({
+  subsets: ["latin"],
+  axes: ["wdth"],
+  variable: "--font-brand-latin",
   display: "swap",
 });
 
@@ -36,7 +44,7 @@ export const metadata: Metadata = {
     type: "website",
   },
   twitter: { card: "summary_large_image" },
-  robots: siteConfig.sampleContent ? { index: false, follow: true } : { index: true, follow: true },
+  robots: siteConfig.allowIndexing ? { index: true, follow: true } : { index: false, follow: true },
 };
 
 export const viewport: Viewport = {
@@ -45,7 +53,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="ta" className={`${anekTamil.variable} ${notoSerifTamil.variable}`} suppressHydrationWarning>
+    <html lang="ta" className={`${anekTamil.variable} ${archivo.variable} ${notoSerifTamil.variable}`} suppressHydrationWarning>
       <body id="top" className="flex min-h-dvh flex-col antialiased">
         <a
           href="#main"

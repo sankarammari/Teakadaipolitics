@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { BrandMark } from "@/components/common/BrandMark";
+import { SocialLinks } from "@/components/common/SocialLinks";
 import { primaryNav, siteConfig } from "@/config/site";
 import { anim } from "@/lib/anim";
 import { repository } from "@/lib/content";
@@ -54,15 +56,13 @@ export async function Header() {
       {/* Masthead (scrolls away on desktop; on smaller screens it stays pinned instead of the nav) */}
       <div className="site-nav sticky top-0 z-30 border-b border-rule bg-paper lg:static lg:border-b-0">
         <div className="container-page flex items-center justify-between gap-4 pb-3 pt-3 lg:pt-5">
-          <Link href="/" className="group block" aria-label={`${siteConfig.name}, முகப்புப் பக்கம்`}>
-            <span
-              {...anim("fade")}
-              className="block whitespace-nowrap font-tamil text-[1.5rem] font-bold leading-tight text-tea min-[360px]:text-[1.75rem] sm:text-[2.3rem] md:text-[2.6rem]"
-            >
-              {siteConfig.name}
-            </span>
-            <span className="mt-0.5 hidden text-sm text-ink-soft sm:block sm:text-[0.95rem]">{siteConfig.tagline}</span>
+          <Link {...anim("fade")} data-anim-once href="/" className="block" aria-label={`${siteConfig.name}, முகப்புப் பக்கம்`}>
+            <BrandMark size="lg" priority />
           </Link>
+          <div className="hidden flex-col items-end gap-2 md:flex">
+            <p className="max-w-xs text-right text-sm leading-snug text-ink-soft">{siteConfig.tagline}</p>
+            <SocialLinks />
+          </div>
           <MobileNav items={primaryNav} />
         </div>
       </div>
@@ -71,8 +71,8 @@ export async function Header() {
       <nav aria-label="முதன்மை வழிசெலுத்தல்" className="site-nav sticky top-0 z-30 hidden border-y border-rule bg-paper/95 backdrop-blur lg:block">
         <div className="container-page flex items-center justify-between gap-6">
           <div className="flex min-w-0 items-center">
-            <Link href="/" tabIndex={-1} aria-hidden className="nav-mark font-tamil text-xl font-bold text-tea">
-              {siteConfig.name}
+            <Link href="/" tabIndex={-1} aria-hidden className="nav-mark">
+              <BrandMark size="sm" />
             </Link>
             <NavLinks items={primaryNav} />
           </div>
